@@ -1,0 +1,33 @@
+{% comment %}
+  ============================================================
+  DropPilot — standalone landing layout
+  ------------------------------------------------------------
+  A minimal Shopify layout that renders ONLY the page content
+  (no theme header / footer / announcement bar), so a landing
+  page using this layout is fully self-contained.
+
+  INSTALL:
+  1. Online Store > Themes > Edit code
+  2. Under "Layout", click "Add a new layout", name it: landing
+  3. Replace its content with THIS file, Save.
+  (Used together with templates/page.droppilot.liquid)
+  ============================================================
+{% endcomment %}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}" class="dp-landing-html">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0a0a14">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <title>{{ page_title }}</title>
+    {% if page_description %}<meta name="description" content="{{ page_description | escape }}">{% endif %}
+    {{ content_for_header }}
+    <style>
+      html.dp-landing-html, html.dp-landing-html body { margin:0; padding:0; background:#0a0a14; }
+    </style>
+  </head>
+  <body class="dp-landing-body">
+    {{ content_for_layout }}
+  </body>
+</html>
