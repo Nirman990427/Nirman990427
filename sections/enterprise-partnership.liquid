@@ -1,5 +1,6 @@
 {%- comment -%}
-  Enterprise Partnership — premium dark-mode B2B landing section.
+  Enterprise Partnership — premium dark-mode design section (centered layout).
+  Placeholder Lorem Ipsum content. Renders complete defaults even with no blocks.
   All CSS/keyframes/SVG ids are scoped to this section instance.
 {%- endcomment -%}
 
@@ -27,6 +28,7 @@
     color: var(--cs-text);
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
     line-height: 1.6;
+    text-align: center;
     -webkit-font-smoothing: antialiased;
     overflow: hidden;
     isolation: isolate;
@@ -37,8 +39,8 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(900px 520px at 15% -10%, rgba(16,185,129,0.10), transparent 60%),
-      radial-gradient(1000px 600px at 100% 0%, rgba(212,175,55,0.08), transparent 55%),
+      radial-gradient(900px 520px at 50% -10%, rgba(16,185,129,0.10), transparent 60%),
+      radial-gradient(1000px 600px at 100% 0%, rgba(212,175,55,0.07), transparent 55%),
       radial-gradient(1200px 800px at 50% 120%, rgba(30,41,59,0.9), transparent 60%);
     z-index: 0;
     pointer-events: none;
@@ -173,9 +175,9 @@
     background: var(--cs-sage);
     box-shadow: 0 0 0 4px rgba(16,185,129,0.18);
   }
-  #cs-corporate-{{ section.id }} .cs-section-head { max-width: 640px; }
+  #cs-corporate-{{ section.id }} .cs-section-head { max-width: 640px; margin: 0 auto; }
   #cs-corporate-{{ section.id }} .cs-section-head h2 { font-size: clamp(28px, 4vw, 40px); margin-top: 16px; }
-  #cs-corporate-{{ section.id }} .cs-section-head p { color: var(--cs-muted); margin-top: 14px; font-size: 16.5px; }
+  #cs-corporate-{{ section.id }} .cs-section-head p { color: var(--cs-muted); margin: 14px auto 0; font-size: 16.5px; }
 
   /* ---------- Glass card ---------- */
   #cs-corporate-{{ section.id }} .cs-card {
@@ -188,13 +190,8 @@
   }
 
   /* ---------- Hero ---------- */
-  #cs-corporate-{{ section.id }} .cs-hero { padding: 64px 0 84px; }
-  #cs-corporate-{{ section.id }} .cs-hero-grid {
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 52px;
-    align-items: center;
-  }
+  #cs-corporate-{{ section.id }} .cs-hero { padding: 72px 0 88px; }
+  #cs-corporate-{{ section.id }} .cs-hero-copy { max-width: 760px; margin: 0 auto; }
   #cs-corporate-{{ section.id }} .cs-hero h1 {
     font-size: clamp(38px, 6vw, 62px);
     margin-top: 22px;
@@ -206,12 +203,15 @@
   #cs-corporate-{{ section.id }} .cs-hero-sub {
     color: var(--cs-muted);
     font-size: 17.5px;
-    margin-top: 20px;
-    max-width: 540px;
+    margin: 20px auto 0;
+    max-width: 580px;
   }
-  #cs-corporate-{{ section.id }} .cs-hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+  #cs-corporate-{{ section.id }} .cs-hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; justify-content: center; }
 
-  #cs-corporate-{{ section.id }} .cs-widget { padding: 22px; margin-top: 34px; max-width: 420px; }
+  #cs-corporate-{{ section.id }} .cs-hero-visual { max-width: 520px; margin: 60px auto 0; }
+  #cs-corporate-{{ section.id }} .cs-diagram { width: 100%; height: auto; display: block; }
+
+  #cs-corporate-{{ section.id }} .cs-widget { padding: 22px; margin: 44px auto 0; max-width: 420px; text-align: left; }
   #cs-corporate-{{ section.id }} .cs-widget-row {
     display: flex;
     align-items: center;
@@ -236,13 +236,9 @@
     color: var(--cs-gold);
   }
 
-  #cs-corporate-{{ section.id }} .cs-hero-visual { position: relative; }
-  #cs-corporate-{{ section.id }} .cs-diagram { width: 100%; height: auto; display: block; }
-
   /* ---------- Trusted by ---------- */
   #cs-corporate-{{ section.id }} .cs-trusted { padding: 40px 0; border-top: 1px solid var(--cs-line); border-bottom: 1px solid var(--cs-line); }
   #cs-corporate-{{ section.id }} .cs-trusted p {
-    text-align: center;
     color: var(--cs-muted);
     font-size: 13px;
     letter-spacing: 0.08em;
@@ -266,9 +262,12 @@
   }
   #cs-corporate-{{ section.id }} .cs-logo:hover { opacity: 1; color: var(--cs-text); }
 
+  /* ---------- Grids ---------- */
+  #cs-corporate-{{ section.id }} .cs-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
+  #cs-corporate-{{ section.id }} .cs-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+
   /* ---------- Features ---------- */
-  #cs-corporate-{{ section.id }} .cs-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-  #cs-corporate-{{ section.id }} .cs-feature { padding: 28px; }
+  #cs-corporate-{{ section.id }} .cs-feature { padding: 32px 28px; }
   #cs-corporate-{{ section.id }} .cs-feature-icon {
     width: 48px; height: 48px;
     display: grid; place-items: center;
@@ -276,14 +275,13 @@
     background: rgba(16,185,129,0.10);
     border: 1px solid rgba(16,185,129,0.22);
     color: var(--cs-sage);
-    margin-bottom: 18px;
+    margin: 0 auto 18px;
   }
   #cs-corporate-{{ section.id }} .cs-feature h3 { font-size: 19px; }
   #cs-corporate-{{ section.id }} .cs-feature p { color: var(--cs-muted); margin-top: 10px; font-size: 15px; }
 
   /* ---------- Metrics ---------- */
-  #cs-corporate-{{ section.id }} .cs-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-  #cs-corporate-{{ section.id }} .cs-metric { padding: 28px; text-align: left; }
+  #cs-corporate-{{ section.id }} .cs-metric { padding: 30px 24px; }
   #cs-corporate-{{ section.id }} .cs-metric-num {
     font-family: 'Bricolage Grotesque', sans-serif;
     font-size: clamp(30px, 4vw, 42px);
@@ -294,17 +292,18 @@
   #cs-corporate-{{ section.id }} .cs-metric-label { color: var(--cs-muted); margin-top: 12px; font-size: 14.5px; }
 
   /* ---------- Protocols ---------- */
-  #cs-corporate-{{ section.id }} .cs-protocols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  #cs-corporate-{{ section.id }} .cs-protocols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 44px; }
   #cs-corporate-{{ section.id }} .cs-protocol {
     display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    padding: 24px;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 32px 24px;
   }
   #cs-corporate-{{ section.id }} .cs-protocol-check {
     flex: 0 0 auto;
-    width: 26px; height: 26px;
-    border-radius: 8px;
+    width: 40px; height: 40px;
+    border-radius: 11px;
     display: grid; place-items: center;
     background: rgba(212,175,55,0.12);
     border: 1px solid rgba(212,175,55,0.28);
@@ -313,7 +312,7 @@
   #cs-corporate-{{ section.id }} .cs-protocol span { font-size: 15.5px; font-weight: 500; }
 
   /* ---------- Team ---------- */
-  #cs-corporate-{{ section.id }} .cs-team { padding: 28px; text-align: center; }
+  #cs-corporate-{{ section.id }} .cs-team { padding: 32px 28px; }
   #cs-corporate-{{ section.id }} .cs-avatar {
     width: 76px; height: 76px;
     margin: 0 auto 18px;
@@ -331,7 +330,6 @@
 
   /* ---------- CTA band ---------- */
   #cs-corporate-{{ section.id }} .cs-cta-band {
-    text-align: center;
     padding: 64px 40px;
     border-radius: 26px;
     background:
@@ -349,8 +347,10 @@
     border-top: 1px solid var(--cs-line);
     padding: 28px 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 10px;
     color: var(--cs-muted);
     font-size: 14px;
   }
@@ -382,7 +382,6 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width: 880px) {
-    #cs-corporate-{{ section.id }} .cs-hero-grid { grid-template-columns: 1fr; gap: 40px; }
     #cs-corporate-{{ section.id }} .cs-nav-links { display: none; }
     #cs-corporate-{{ section.id }} .cs-grid-3,
     #cs-corporate-{{ section.id }} .cs-protocols { grid-template-columns: repeat(2, 1fr); }
@@ -398,7 +397,6 @@
     #cs-corporate-{{ section.id }} .cs-hero-cta .cs-btn { width: 100%; }
     #cs-corporate-{{ section.id }} .cs-logos { gap: 26px; }
     #cs-corporate-{{ section.id }} .cs-logo { font-size: 17px; }
-    #cs-corporate-{{ section.id }} .cs-footer { flex-direction: column; gap: 12px; }
     #cs-corporate-{{ section.id }} .cs-cta-band { padding: 48px 22px; }
     #cs-corporate-{{ section.id }} .cs-section { padding: 60px 0; }
   }
@@ -425,11 +423,11 @@
             <span>{{ section.settings.brand_name | default: 'Nexus' }}</span>
           </a>
           <div class="cs-nav-links">
-            <a href="#cs-program-{{ section.id }}">{{ section.settings.nav_link_1 | default: 'Program' }}</a>
-            <a href="#cs-network-{{ section.id }}">{{ section.settings.nav_link_2 | default: 'Network' }}</a>
-            <a href="#cs-security-{{ section.id }}">{{ section.settings.nav_link_3 | default: 'Security' }}</a>
+            <a href="#cs-program-{{ section.id }}">{{ section.settings.nav_link_1 | default: 'Lorem' }}</a>
+            <a href="#cs-network-{{ section.id }}">{{ section.settings.nav_link_2 | default: 'Ipsum' }}</a>
+            <a href="#cs-security-{{ section.id }}">{{ section.settings.nav_link_3 | default: 'Dolor' }}</a>
           </div>
-          <a href="{{ section.settings.portal_link | default: '#' }}" class="cs-btn cs-btn--pill">{{ section.settings.portal_label | default: 'Partner Portal' }}</a>
+          <a href="{{ section.settings.portal_link | default: '#' }}" class="cs-btn cs-btn--pill">{{ section.settings.portal_label | default: 'Lorem Ipsum' }}</a>
         </div>
       </div>
     </nav>
@@ -439,71 +437,69 @@
     {%- comment -%} ---------- Hero ---------- {%- endcomment -%}
     <header class="cs-hero">
       <div class="cs-container">
-        <div class="cs-hero-grid">
-          <div class="cs-hero-copy" data-cs-reveal>
-            <span class="cs-eyebrow"><span class="cs-dot"></span>{{ section.settings.hero_eyebrow | default: 'Infrastructure Division — Now Recruiting' }}</span>
-            <h1>{{ section.settings.hero_title | default: 'Join the Enterprise Network' }}</h1>
-            <p class="cs-hero-sub">{{ section.settings.hero_subtitle | default: 'We manage high-scale operations processing millions monthly. Our clients need verified infrastructure. Partner with our division, keep full administrator control, and earn daily returns.' }}</p>
-            {%- assign cs_hero_primary = section.settings.hero_primary_link -%}
-            {%- if cs_hero_primary == blank -%}{%- assign cs_hero_primary = '#cs-apply-' | append: section.id -%}{%- endif -%}
-            <div class="cs-hero-cta">
-              <a href="{{ cs_hero_primary }}" class="cs-btn cs-btn--primary">{{ section.settings.hero_primary_label | default: 'Apply Now' }}</a>
-              <a href="#cs-program-{{ section.id }}" class="cs-btn cs-btn--ghost">{{ section.settings.hero_secondary_label | default: 'See the Program' }}</a>
-            </div>
-
-            <div class="cs-widget cs-card" data-cs-reveal>
-              <div class="cs-widget-row">
-                <span class="cs-widget-label">{{ section.settings.widget_label_1 | default: 'Daily Volume' }}</span>
-                <span class="cs-widget-val">{{ section.settings.widget_value_1 | default: '£8,600' }}</span>
-              </div>
-              <div class="cs-widget-row">
-                <span class="cs-widget-label">{{ section.settings.widget_label_2 | default: 'Rate' }}</span>
-                <span class="cs-widget-val">{{ section.settings.widget_value_2 | default: '5%' }}</span>
-              </div>
-              <div class="cs-widget-total">
-                <span class="cs-widget-label">{{ section.settings.widget_total_label | default: 'Estimated Daily Return' }}</span>
-                <span class="cs-big">{{ section.settings.widget_total_value | default: '£430' }}</span>
-              </div>
-            </div>
+        <div class="cs-hero-copy" data-cs-reveal>
+          <span class="cs-eyebrow"><span class="cs-dot"></span>{{ section.settings.hero_eyebrow | default: 'Lorem ipsum dolor sit' }}</span>
+          <h1>{{ section.settings.hero_title | default: 'Lorem ipsum dolor sit amet consectetur' }}</h1>
+          <p class="cs-hero-sub">{{ section.settings.hero_subtitle | default: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.' }}</p>
+          {%- assign cs_hero_primary = section.settings.hero_primary_link -%}
+          {%- if cs_hero_primary == blank -%}{%- assign cs_hero_primary = '#cs-apply-' | append: section.id -%}{%- endif -%}
+          <div class="cs-hero-cta">
+            <a href="{{ cs_hero_primary }}" class="cs-btn cs-btn--primary">{{ section.settings.hero_primary_label | default: 'Lorem Ipsum' }}</a>
+            <a href="#cs-program-{{ section.id }}" class="cs-btn cs-btn--ghost">{{ section.settings.hero_secondary_label | default: 'Dolor Sit' }}</a>
           </div>
+        </div>
 
-          <div class="cs-hero-visual" data-cs-reveal>
-            <svg class="cs-diagram" viewBox="0 0 460 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Account connected to three clients">
-              <defs>
-                <radialGradient id="cs-glow-{{ section.id }}" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="rgba(16,185,129,0.35)"/>
-                  <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
-                </radialGradient>
-                <linearGradient id="cs-node-grad-{{ section.id }}" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%" stop-color="#10b981"/>
-                  <stop offset="100%" stop-color="#d4af37"/>
-                </linearGradient>
-              </defs>
+        <div class="cs-hero-visual" data-cs-reveal>
+          <svg class="cs-diagram" viewBox="0 0 460 380" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lorem ipsum diagram">
+            <defs>
+              <radialGradient id="cs-glow-{{ section.id }}" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="rgba(16,185,129,0.35)"/>
+                <stop offset="100%" stop-color="rgba(16,185,129,0)"/>
+              </radialGradient>
+              <linearGradient id="cs-node-grad-{{ section.id }}" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#10b981"/>
+                <stop offset="100%" stop-color="#d4af37"/>
+              </linearGradient>
+            </defs>
 
-              <ellipse cx="230" cy="120" rx="150" ry="110" fill="url(#cs-glow-{{ section.id }})"/>
+            <ellipse cx="230" cy="120" rx="150" ry="110" fill="url(#cs-glow-{{ section.id }})"/>
 
-              <line class="cs-flow-line" x1="230" y1="120" x2="90"  y2="300" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
-              <line class="cs-flow-line" x1="230" y1="120" x2="230" y2="320" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
-              <line class="cs-flow-line" x1="230" y1="120" x2="370" y2="300" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+            <line class="cs-flow-line" x1="230" y1="120" x2="90"  y2="300" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+            <line class="cs-flow-line" x1="230" y1="120" x2="230" y2="320" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
+            <line class="cs-flow-line" x1="230" y1="120" x2="370" y2="300" stroke="rgba(255,255,255,0.25)" stroke-width="1.5"/>
 
-              <circle class="cs-node-pulse" cx="230" cy="120" r="58" fill="rgba(16,185,129,0.06)" stroke="url(#cs-node-grad-{{ section.id }})" stroke-width="1.6"/>
-              <circle cx="230" cy="120" r="40" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
-              <text x="230" y="116" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="13" font-weight="600">Your</text>
-              <text x="230" y="132" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="13" font-weight="600">Account</text>
+            <circle class="cs-node-pulse" cx="230" cy="120" r="58" fill="rgba(16,185,129,0.06)" stroke="url(#cs-node-grad-{{ section.id }})" stroke-width="1.6"/>
+            <circle cx="230" cy="120" r="40" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+            <text x="230" y="116" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="13" font-weight="600">Lorem</text>
+            <text x="230" y="132" text-anchor="middle" fill="#f8fafc" font-family="Inter, sans-serif" font-size="13" font-weight="600">Ipsum</text>
 
-              <g>
-                <circle cx="90" cy="300" r="42" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-                <text x="90" y="305" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Client A</text>
-              </g>
-              <g>
-                <circle cx="230" cy="320" r="42" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-                <text x="230" y="325" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Client B</text>
-              </g>
-              <g>
-                <circle cx="370" cy="300" r="42" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-                <text x="370" y="305" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Client C</text>
-              </g>
-            </svg>
+            <g>
+              <circle cx="90" cy="300" r="42" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <text x="90" y="305" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Dolor</text>
+            </g>
+            <g>
+              <circle cx="230" cy="320" r="42" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <text x="230" y="325" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Sit</text>
+            </g>
+            <g>
+              <circle cx="370" cy="300" r="42" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+              <text x="370" y="305" text-anchor="middle" fill="#94a3b8" font-family="Inter, sans-serif" font-size="12.5" font-weight="500">Amet</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="cs-widget cs-card" data-cs-reveal>
+          <div class="cs-widget-row">
+            <span class="cs-widget-label">{{ section.settings.widget_label_1 | default: 'Lorem ipsum' }}</span>
+            <span class="cs-widget-val">{{ section.settings.widget_value_1 | default: '1,240' }}</span>
+          </div>
+          <div class="cs-widget-row">
+            <span class="cs-widget-label">{{ section.settings.widget_label_2 | default: 'Dolor sit' }}</span>
+            <span class="cs-widget-val">{{ section.settings.widget_value_2 | default: '12%' }}</span>
+          </div>
+          <div class="cs-widget-total">
+            <span class="cs-widget-label">{{ section.settings.widget_total_label | default: 'Consectetur total' }}</span>
+            <span class="cs-big">{{ section.settings.widget_total_value | default: '8,600' }}</span>
           </div>
         </div>
       </div>
@@ -512,14 +508,14 @@
     {%- comment -%} ---------- Trusted by ---------- {%- endcomment -%}
     <section class="cs-trusted">
       <div class="cs-container">
-        <p data-cs-reveal>{{ section.settings.trusted_subhead | default: 'Trusted by operators across the network' }}</p>
+        <p data-cs-reveal>{{ section.settings.trusted_subhead | default: 'Lorem ipsum dolor sit amet consectetur' }}</p>
         <div class="cs-logos" data-cs-reveal>
-          <span class="cs-logo">Atlas</span>
-          <span class="cs-logo">Northwind</span>
-          <span class="cs-logo">Beacon</span>
-          <span class="cs-logo">Pine</span>
-          <span class="cs-logo">Mapleworks</span>
-          <span class="cs-logo">Verve</span>
+          <span class="cs-logo">Lorem</span>
+          <span class="cs-logo">Ipsum</span>
+          <span class="cs-logo">Dolor</span>
+          <span class="cs-logo">Amet</span>
+          <span class="cs-logo">Consectetur</span>
+          <span class="cs-logo">Adipiscing</span>
         </div>
       </div>
     </section>
@@ -528,14 +524,15 @@
     <section class="cs-section" id="cs-program-{{ section.id }}">
       <div class="cs-container">
         <div class="cs-section-head" data-cs-reveal>
-          <span class="cs-eyebrow"><span class="cs-dot"></span>{{ section.settings.features_eyebrow | default: 'The Program' }}</span>
-          <h2>{{ section.settings.features_title | default: 'Built for serious infrastructure partners' }}</h2>
-          <p>{{ section.settings.features_subtitle | default: 'Every partnership is matched, documented, and settled through a single transparent workflow.' }}</p>
+          <span class="cs-eyebrow"><span class="cs-dot"></span>{{ section.settings.features_eyebrow | default: 'Lorem ipsum' }}</span>
+          <h2>{{ section.settings.features_title | default: 'Lorem ipsum dolor sit amet adipiscing' }}</h2>
+          <p>{{ section.settings.features_subtitle | default: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.' }}</p>
         </div>
 
-        <div class="cs-grid-3" style="margin-top: 40px;">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'feature' -%}
+        {%- assign cs_features = section.blocks | where: 'type', 'feature' -%}
+        <div class="cs-grid-3">
+          {%- if cs_features.size > 0 -%}
+            {%- for block in cs_features -%}
               <article class="cs-card cs-feature" data-cs-reveal {{ block.shopify_attributes }}>
                 <div class="cs-feature-icon">
                   {%- case block.settings.icon -%}
@@ -550,8 +547,24 @@
                 <h3>{{ block.settings.title }}</h3>
                 <p>{{ block.settings.body }}</p>
               </article>
-            {%- endif -%}
-          {%- endfor -%}
+            {%- endfor -%}
+          {%- else -%}
+            <article class="cs-card cs-feature" data-cs-reveal>
+              <div class="cs-feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></div>
+              <h3>Lorem ipsum dolor</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+            </article>
+            <article class="cs-card cs-feature" data-cs-reveal>
+              <div class="cs-feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8"/><path d="M8 17h8"/></svg></div>
+              <h3>Consectetur elit</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+            </article>
+            <article class="cs-card cs-feature" data-cs-reveal>
+              <div class="cs-feature-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M4 10h16"/><path d="M12 3 4 7h16z"/><path d="M5 10v8M9 10v8M15 10v8M19 10v8"/></svg></div>
+              <h3>Tempor incididunt</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+            </article>
+          {%- endif -%}
         </div>
       </div>
     </section>
@@ -559,16 +572,34 @@
     {%- comment -%} ---------- Metrics ---------- {%- endcomment -%}
     <section class="cs-section" id="cs-network-{{ section.id }}" style="padding-top: 0;">
       <div class="cs-container">
+        {%- assign cs_metrics = section.blocks | where: 'type', 'metric' -%}
         <div class="cs-grid-4">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'metric' -%}
+          {%- if cs_metrics.size > 0 -%}
+            {%- for block in cs_metrics -%}
               <article class="cs-card cs-metric" data-cs-reveal {{ block.shopify_attributes }}>
                 <div class="cs-metric-num"
                   {%- if block.settings.animate -%} data-cs-count="{{ block.settings.count_to }}" data-cs-prefix="{{ block.settings.prefix }}" data-cs-suffix="{{ block.settings.suffix }}"{%- endif -%}>{{ block.settings.value }}</div>
                 <div class="cs-metric-label">{{ block.settings.label }}</div>
               </article>
-            {%- endif -%}
-          {%- endfor -%}
+            {%- endfor -%}
+          {%- else -%}
+            <article class="cs-card cs-metric" data-cs-reveal>
+              <div class="cs-metric-num" data-cs-count="1240" data-cs-prefix="" data-cs-suffix="">1,240</div>
+              <div class="cs-metric-label">Lorem ipsum dolor</div>
+            </article>
+            <article class="cs-card cs-metric" data-cs-reveal>
+              <div class="cs-metric-num" data-cs-count="98" data-cs-prefix="" data-cs-suffix="%">98%</div>
+              <div class="cs-metric-label">Sit amet consectetur</div>
+            </article>
+            <article class="cs-card cs-metric" data-cs-reveal>
+              <div class="cs-metric-num">24/7</div>
+              <div class="cs-metric-label">Adipiscing elit sed</div>
+            </article>
+            <article class="cs-card cs-metric" data-cs-reveal>
+              <div class="cs-metric-num" data-cs-count="100" data-cs-prefix="" data-cs-suffix="+">100+</div>
+              <div class="cs-metric-label">Eiusmod tempor</div>
+            </article>
+          {%- endif -%}
         </div>
       </div>
     </section>
@@ -577,20 +608,35 @@
     <section class="cs-section" id="cs-security-{{ section.id }}" style="padding-top: 0;">
       <div class="cs-container">
         <div class="cs-section-head" data-cs-reveal>
-          <span class="cs-eyebrow"><span class="cs-dot"></span>{{ section.settings.protocols_eyebrow | default: 'Security & Control' }}</span>
-          <h2>{{ section.settings.protocols_title | default: 'You stay in control at every step' }}</h2>
+          <span class="cs-eyebrow"><span class="cs-dot"></span>{{ section.settings.protocols_eyebrow | default: 'Lorem ipsum' }}</span>
+          <h2>{{ section.settings.protocols_title | default: 'Lorem ipsum dolor sit amet elit' }}</h2>
         </div>
-        <div class="cs-protocols" style="margin-top: 36px;">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'protocol' -%}
+
+        {%- assign cs_protocols = section.blocks | where: 'type', 'protocol' -%}
+        <div class="cs-protocols">
+          {%- if cs_protocols.size > 0 -%}
+            {%- for block in cs_protocols -%}
               <div class="cs-card cs-protocol" data-cs-reveal {{ block.shopify_attributes }}>
                 <span class="cs-protocol-check">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
                 </span>
                 <span>{{ block.settings.text }}</span>
               </div>
-            {%- endif -%}
-          {%- endfor -%}
+            {%- endfor -%}
+          {%- else -%}
+            <div class="cs-card cs-protocol" data-cs-reveal>
+              <span class="cs-protocol-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span>Lorem ipsum dolor sit amet consectetur</span>
+            </div>
+            <div class="cs-card cs-protocol" data-cs-reveal>
+              <span class="cs-protocol-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span>Adipiscing elit sed do eiusmod</span>
+            </div>
+            <div class="cs-card cs-protocol" data-cs-reveal>
+              <span class="cs-protocol-check"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span>Tempor incididunt ut labore magna</span>
+            </div>
+          {%- endif -%}
         </div>
       </div>
     </section>
@@ -599,19 +645,37 @@
     <section class="cs-section" style="padding-top: 0;">
       <div class="cs-container">
         <div class="cs-section-head" data-cs-reveal>
-          <span class="cs-eyebrow"><span class="cs-dot"></span>{{ section.settings.team_eyebrow | default: 'The Team' }}</span>
-          <h2>{{ section.settings.team_title | default: 'People behind the partnership' }}</h2>
+          <span class="cs-eyebrow"><span class="cs-dot"></span>{{ section.settings.team_eyebrow | default: 'Lorem ipsum' }}</span>
+          <h2>{{ section.settings.team_title | default: 'Lorem ipsum dolor sit amet' }}</h2>
         </div>
-        <div class="cs-grid-3" style="margin-top: 40px;">
-          {%- for block in section.blocks -%}
-            {%- if block.type == 'team_member' -%}
+
+        {%- assign cs_team = section.blocks | where: 'type', 'team_member' -%}
+        <div class="cs-grid-3">
+          {%- if cs_team.size > 0 -%}
+            {%- for block in cs_team -%}
               <article class="cs-card cs-team" data-cs-reveal {{ block.shopify_attributes }}>
                 <div class="cs-avatar">{{ block.settings.initials }}</div>
                 <h3>{{ block.settings.name }}</h3>
                 <p>{{ block.settings.title }}</p>
               </article>
-            {%- endif -%}
-          {%- endfor -%}
+            {%- endfor -%}
+          {%- else -%}
+            <article class="cs-card cs-team" data-cs-reveal>
+              <div class="cs-avatar">LI</div>
+              <h3>Lorem Ipsum</h3>
+              <p>Lorem ipsum dolor sit</p>
+            </article>
+            <article class="cs-card cs-team" data-cs-reveal>
+              <div class="cs-avatar">DS</div>
+              <h3>Dolor Sit</h3>
+              <p>Consectetur adipiscing elit</p>
+            </article>
+            <article class="cs-card cs-team" data-cs-reveal>
+              <div class="cs-avatar">AC</div>
+              <h3>Amet Consectetur</h3>
+              <p>Sed do eiusmod tempor</p>
+            </article>
+          {%- endif -%}
         </div>
       </div>
     </section>
@@ -620,8 +684,8 @@
     <section class="cs-section" id="cs-apply-{{ section.id }}" style="padding-top: 0;">
       <div class="cs-container">
         <div class="cs-cta-band" data-cs-reveal>
-          <h2>{{ section.settings.cta_title | default: 'Your infrastructure is a strategic asset. Join the network.' }}</h2>
-          <a href="{{ section.settings.cta_link | default: '#' }}" class="cs-btn cs-btn--primary">{{ section.settings.cta_label | default: 'Apply Now' }}</a>
+          <h2>{{ section.settings.cta_title | default: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' }}</h2>
+          <a href="{{ section.settings.cta_link | default: '#' }}" class="cs-btn cs-btn--primary">{{ section.settings.cta_label | default: 'Lorem Ipsum' }}</a>
         </div>
       </div>
     </section>
@@ -730,331 +794,89 @@
   "tag": "section",
   "class": "cs-section-wrapper",
   "settings": [
-    {
-      "type": "header",
-      "content": "Navigation"
-    },
-    {
-      "type": "text",
-      "id": "brand_name",
-      "label": "Brand name",
-      "default": "Nexus"
-    },
-    {
-      "type": "text",
-      "id": "nav_link_1",
-      "label": "Nav link 1",
-      "default": "Program"
-    },
-    {
-      "type": "text",
-      "id": "nav_link_2",
-      "label": "Nav link 2",
-      "default": "Network"
-    },
-    {
-      "type": "text",
-      "id": "nav_link_3",
-      "label": "Nav link 3",
-      "default": "Security"
-    },
-    {
-      "type": "text",
-      "id": "portal_label",
-      "label": "Portal button label",
-      "default": "Partner Portal"
-    },
-    {
-      "type": "url",
-      "id": "portal_link",
-      "label": "Portal button link"
-    },
-    {
-      "type": "header",
-      "content": "Hero"
-    },
-    {
-      "type": "text",
-      "id": "hero_eyebrow",
-      "label": "Hero eyebrow",
-      "default": "Infrastructure Division — Now Recruiting"
-    },
-    {
-      "type": "text",
-      "id": "hero_title",
-      "label": "Hero heading",
-      "default": "Join the Enterprise Network"
-    },
-    {
-      "type": "textarea",
-      "id": "hero_subtitle",
-      "label": "Hero subtitle",
-      "default": "We manage high-scale operations processing millions monthly. Our clients need verified infrastructure. Partner with our division, keep full administrator control, and earn daily returns."
-    },
-    {
-      "type": "text",
-      "id": "hero_primary_label",
-      "label": "Primary button label",
-      "default": "Apply Now"
-    },
-    {
-      "type": "url",
-      "id": "hero_primary_link",
-      "label": "Primary button link"
-    },
-    {
-      "type": "text",
-      "id": "hero_secondary_label",
-      "label": "Secondary button label",
-      "default": "See the Program"
-    },
-    {
-      "type": "header",
-      "content": "Hero Widget"
-    },
-    {
-      "type": "text",
-      "id": "widget_label_1",
-      "label": "Widget row 1 label",
-      "default": "Daily Volume"
-    },
-    {
-      "type": "text",
-      "id": "widget_value_1",
-      "label": "Widget row 1 value",
-      "default": "£8,600"
-    },
-    {
-      "type": "text",
-      "id": "widget_label_2",
-      "label": "Widget row 2 label",
-      "default": "Rate"
-    },
-    {
-      "type": "text",
-      "id": "widget_value_2",
-      "label": "Widget row 2 value",
-      "default": "5%"
-    },
-    {
-      "type": "text",
-      "id": "widget_total_label",
-      "label": "Widget total label",
-      "default": "Estimated Daily Return"
-    },
-    {
-      "type": "text",
-      "id": "widget_total_value",
-      "label": "Widget total value",
-      "default": "£430"
-    },
-    {
-      "type": "header",
-      "content": "Trusted By"
-    },
-    {
-      "type": "text",
-      "id": "trusted_subhead",
-      "label": "Trusted by subhead",
-      "default": "Trusted by operators across the network"
-    },
-    {
-      "type": "header",
-      "content": "Features Section"
-    },
-    {
-      "type": "text",
-      "id": "features_eyebrow",
-      "label": "Features eyebrow",
-      "default": "The Program"
-    },
-    {
-      "type": "text",
-      "id": "features_title",
-      "label": "Features heading",
-      "default": "Built for serious infrastructure partners"
-    },
-    {
-      "type": "textarea",
-      "id": "features_subtitle",
-      "label": "Features subtitle",
-      "default": "Every partnership is matched, documented, and settled through a single transparent workflow."
-    },
-    {
-      "type": "header",
-      "content": "Protocols Section"
-    },
-    {
-      "type": "text",
-      "id": "protocols_eyebrow",
-      "label": "Protocols eyebrow",
-      "default": "Security & Control"
-    },
-    {
-      "type": "text",
-      "id": "protocols_title",
-      "label": "Protocols heading",
-      "default": "You stay in control at every step"
-    },
-    {
-      "type": "header",
-      "content": "Team Section"
-    },
-    {
-      "type": "text",
-      "id": "team_eyebrow",
-      "label": "Team eyebrow",
-      "default": "The Team"
-    },
-    {
-      "type": "text",
-      "id": "team_title",
-      "label": "Team heading",
-      "default": "People behind the partnership"
-    },
-    {
-      "type": "header",
-      "content": "CTA Band"
-    },
-    {
-      "type": "textarea",
-      "id": "cta_title",
-      "label": "CTA heading",
-      "default": "Your infrastructure is a strategic asset. Join the network."
-    },
-    {
-      "type": "text",
-      "id": "cta_label",
-      "label": "CTA button label",
-      "default": "Apply Now"
-    },
-    {
-      "type": "url",
-      "id": "cta_link",
-      "label": "CTA button link"
-    },
-    {
-      "type": "header",
-      "content": "Footer"
-    },
-    {
-      "type": "text",
-      "id": "footer_text",
-      "label": "Footer text",
-      "default": "© 2026 Nexus"
-    },
-    {
-      "type": "text",
-      "id": "footer_back",
-      "label": "Back-to-top label",
-      "default": "Back to top"
-    }
+    { "type": "header", "content": "Navigation" },
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "Nexus" },
+    { "type": "text", "id": "nav_link_1", "label": "Nav link 1", "default": "Lorem" },
+    { "type": "text", "id": "nav_link_2", "label": "Nav link 2", "default": "Ipsum" },
+    { "type": "text", "id": "nav_link_3", "label": "Nav link 3", "default": "Dolor" },
+    { "type": "text", "id": "portal_label", "label": "Portal button label", "default": "Lorem Ipsum" },
+    { "type": "url", "id": "portal_link", "label": "Portal button link" },
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Lorem ipsum dolor sit" },
+    { "type": "text", "id": "hero_title", "label": "Hero heading", "default": "Lorem ipsum dolor sit amet consectetur" },
+    { "type": "textarea", "id": "hero_subtitle", "label": "Hero subtitle", "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam." },
+    { "type": "text", "id": "hero_primary_label", "label": "Primary button label", "default": "Lorem Ipsum" },
+    { "type": "url", "id": "hero_primary_link", "label": "Primary button link" },
+    { "type": "text", "id": "hero_secondary_label", "label": "Secondary button label", "default": "Dolor Sit" },
+    { "type": "header", "content": "Hero Widget" },
+    { "type": "text", "id": "widget_label_1", "label": "Widget row 1 label", "default": "Lorem ipsum" },
+    { "type": "text", "id": "widget_value_1", "label": "Widget row 1 value", "default": "1,240" },
+    { "type": "text", "id": "widget_label_2", "label": "Widget row 2 label", "default": "Dolor sit" },
+    { "type": "text", "id": "widget_value_2", "label": "Widget row 2 value", "default": "12%" },
+    { "type": "text", "id": "widget_total_label", "label": "Widget total label", "default": "Consectetur total" },
+    { "type": "text", "id": "widget_total_value", "label": "Widget total value", "default": "8,600" },
+    { "type": "header", "content": "Trusted By" },
+    { "type": "text", "id": "trusted_subhead", "label": "Trusted by subhead", "default": "Lorem ipsum dolor sit amet consectetur" },
+    { "type": "header", "content": "Features Section" },
+    { "type": "text", "id": "features_eyebrow", "label": "Features eyebrow", "default": "Lorem ipsum" },
+    { "type": "text", "id": "features_title", "label": "Features heading", "default": "Lorem ipsum dolor sit amet adipiscing" },
+    { "type": "textarea", "id": "features_subtitle", "label": "Features subtitle", "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore." },
+    { "type": "header", "content": "Protocols Section" },
+    { "type": "text", "id": "protocols_eyebrow", "label": "Protocols eyebrow", "default": "Lorem ipsum" },
+    { "type": "text", "id": "protocols_title", "label": "Protocols heading", "default": "Lorem ipsum dolor sit amet elit" },
+    { "type": "header", "content": "Team Section" },
+    { "type": "text", "id": "team_eyebrow", "label": "Team eyebrow", "default": "Lorem ipsum" },
+    { "type": "text", "id": "team_title", "label": "Team heading", "default": "Lorem ipsum dolor sit amet" },
+    { "type": "header", "content": "CTA Band" },
+    { "type": "textarea", "id": "cta_title", "label": "CTA heading", "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." },
+    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "Lorem Ipsum" },
+    { "type": "url", "id": "cta_link", "label": "CTA button link" },
+    { "type": "header", "content": "Footer" },
+    { "type": "text", "id": "footer_text", "label": "Footer text", "default": "© 2026 Nexus" },
+    { "type": "text", "id": "footer_back", "label": "Back-to-top label", "default": "Back to top" }
   ],
   "blocks": [
     {
       "type": "feature",
       "name": "Feature",
       "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
+        { "type": "select", "id": "icon", "label": "Icon",
           "options": [
             { "value": "shield", "label": "Shield" },
             { "value": "document", "label": "Document" },
             { "value": "bank", "label": "Bank" }
           ],
-          "default": "shield"
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Verified Client Matching"
-        },
-        {
-          "type": "textarea",
-          "id": "body",
-          "label": "Body",
-          "default": "We pair your account with pre-screened clients so every engagement starts from a verified baseline."
-        }
+          "default": "shield" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Lorem ipsum dolor" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." }
       ]
     },
     {
       "type": "metric",
       "name": "Metric",
       "settings": [
-        {
-          "type": "text",
-          "id": "value",
-          "label": "Display value",
-          "default": "£430"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Label",
-          "default": "Max daily return"
-        },
-        {
-          "type": "checkbox",
-          "id": "animate",
-          "label": "Animate count up",
-          "default": true
-        },
-        {
-          "type": "number",
-          "id": "count_to",
-          "label": "Count to (number only)",
-          "default": 430
-        },
-        {
-          "type": "text",
-          "id": "prefix",
-          "label": "Prefix (e.g. £)",
-          "default": "£"
-        },
-        {
-          "type": "text",
-          "id": "suffix",
-          "label": "Suffix (e.g. %)"
-        }
+        { "type": "text", "id": "value", "label": "Display value", "default": "1,240" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Lorem ipsum dolor" },
+        { "type": "checkbox", "id": "animate", "label": "Animate count up", "default": true },
+        { "type": "number", "id": "count_to", "label": "Count to (number only)", "default": 1240 },
+        { "type": "text", "id": "prefix", "label": "Prefix (e.g. £)" },
+        { "type": "text", "id": "suffix", "label": "Suffix (e.g. %)" }
       ]
     },
     {
       "type": "protocol",
       "name": "Protocol",
       "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Protocol text",
-          "default": "You remain sole administrator"
-        }
+        { "type": "text", "id": "text", "label": "Protocol text", "default": "Lorem ipsum dolor sit amet consectetur" }
       ]
     },
     {
       "type": "team_member",
       "name": "Team Member",
       "settings": [
-        {
-          "type": "text",
-          "id": "initials",
-          "label": "Initials",
-          "default": "JR"
-        },
-        {
-          "type": "text",
-          "id": "name",
-          "label": "Name",
-          "default": "James R."
-        },
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Title",
-          "default": "Head of Partner Success"
-        }
+        { "type": "text", "id": "initials", "label": "Initials", "default": "LI" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Lorem Ipsum" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Lorem ipsum dolor sit" }
       ]
     }
   ],
@@ -1062,111 +884,19 @@
     {
       "name": "Enterprise Partnership",
       "blocks": [
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "shield",
-            "title": "Verified Client Matching",
-            "body": "We pair your account with pre-screened clients so every engagement starts from a verified baseline."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "document",
-            "title": "Solicitor-Drafted Agreements",
-            "body": "Each partnership runs on clear, professionally drafted agreements reviewed before you sign."
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "icon": "bank",
-            "title": "Daily Settlement Schedule",
-            "body": "Returns are reconciled and settled on a predictable daily schedule with full traceability."
-          }
-        },
-        {
-          "type": "metric",
-          "settings": {
-            "value": "£430",
-            "label": "Max daily return",
-            "animate": true,
-            "count_to": 430,
-            "prefix": "£"
-          }
-        },
-        {
-          "type": "metric",
-          "settings": {
-            "value": "5%",
-            "label": "Minimum rate",
-            "animate": true,
-            "count_to": 5,
-            "suffix": "%"
-          }
-        },
-        {
-          "type": "metric",
-          "settings": {
-            "value": "24h",
-            "label": "First settlement",
-            "animate": true,
-            "count_to": 24,
-            "suffix": "h"
-          }
-        },
-        {
-          "type": "metric",
-          "settings": {
-            "value": "Full Admin",
-            "label": "Retained control",
-            "animate": false,
-            "count_to": 0
-          }
-        },
-        {
-          "type": "protocol",
-          "settings": {
-            "text": "You remain sole administrator"
-          }
-        },
-        {
-          "type": "protocol",
-          "settings": {
-            "text": "Instant disconnect anytime"
-          }
-        },
-        {
-          "type": "protocol",
-          "settings": {
-            "text": "UK transfers with full traceability"
-          }
-        },
-        {
-          "type": "team_member",
-          "settings": {
-            "initials": "JR",
-            "name": "James R.",
-            "title": "Head of Partner Success"
-          }
-        },
-        {
-          "type": "team_member",
-          "settings": {
-            "initials": "SL",
-            "name": "Sarah L.",
-            "title": "Legal & Compliance"
-          }
-        },
-        {
-          "type": "team_member",
-          "settings": {
-            "initials": "AT",
-            "name": "Alex T.",
-            "title": "Account Director"
-          }
-        }
+        { "type": "feature", "settings": { "icon": "shield", "title": "Lorem ipsum dolor", "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." } },
+        { "type": "feature", "settings": { "icon": "document", "title": "Consectetur elit", "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." } },
+        { "type": "feature", "settings": { "icon": "bank", "title": "Tempor incididunt", "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt." } },
+        { "type": "metric", "settings": { "value": "1,240", "label": "Lorem ipsum dolor", "animate": true, "count_to": 1240 } },
+        { "type": "metric", "settings": { "value": "98%", "label": "Sit amet consectetur", "animate": true, "count_to": 98, "suffix": "%" } },
+        { "type": "metric", "settings": { "value": "24/7", "label": "Adipiscing elit sed", "animate": false, "count_to": 0 } },
+        { "type": "metric", "settings": { "value": "100+", "label": "Eiusmod tempor", "animate": true, "count_to": 100, "suffix": "+" } },
+        { "type": "protocol", "settings": { "text": "Lorem ipsum dolor sit amet consectetur" } },
+        { "type": "protocol", "settings": { "text": "Adipiscing elit sed do eiusmod" } },
+        { "type": "protocol", "settings": { "text": "Tempor incididunt ut labore magna" } },
+        { "type": "team_member", "settings": { "initials": "LI", "name": "Lorem Ipsum", "title": "Lorem ipsum dolor sit" } },
+        { "type": "team_member", "settings": { "initials": "DS", "name": "Dolor Sit", "title": "Consectetur adipiscing elit" } },
+        { "type": "team_member", "settings": { "initials": "AC", "name": "Amet Consectetur", "title": "Sed do eiusmod tempor" } }
       ]
     }
   ]
