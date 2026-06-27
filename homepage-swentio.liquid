@@ -1,0 +1,827 @@
+{% comment %}
+  HOMEPAGE SECTION — Corrigée
+  Tous les correctifs design / accessibilité / bugs appliqués.
+  Va dans : sections/homepage-swentio.liquid
+{% endcomment %}
+
+<style>
+  :root {
+    --hp-bg: #f4f6fb;
+    --hp-surface: #ffffff;
+    --hp-ink: #0f172a;
+    --hp-ink-soft: #475569;
+    --hp-ink-faint: #64748b; /* contraste AA relevé (anciennement #94a3b8) */
+    --hp-brand: #4f46e5;
+    --hp-brand-light: #6366f1;
+    --hp-brand-soft: #eef2ff;
+    --hp-accent: #10b981;
+    --hp-accent-soft: #d1fae5;
+    --hp-warm: #f8fafc;
+    --hp-border: #e2e8f0;
+    --hp-radius: 20px;
+    --hp-radius-sm: 14px;
+    --hp-max: 1140px;
+    --hp-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    /* Dégradé d'accent unifié (texte) */
+    --hp-grad: linear-gradient(135deg, var(--hp-brand), var(--hp-accent));
+    /* Dégradé bouton */
+    --hp-grad-btn: linear-gradient(135deg, var(--hp-brand), var(--hp-brand-light));
+  }
+
+  .swentio-homepage * { margin: 0; padding: 0; box-sizing: border-box; }
+  .swentio-homepage a { color: inherit; text-decoration: none; }
+
+  .swentio-homepage { position: relative; z-index: 1; font-family: 'Inter', system-ui, sans-serif; color: var(--hp-ink); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; background: var(--hp-bg); }
+
+  /* Focus clavier visible (accessibilité) */
+  .swentio-homepage a:focus-visible,
+  .swentio-homepage button:focus-visible,
+  .swentio-homepage input:focus-visible,
+  .sh-wa:focus-visible,
+  .sh-mc:focus-visible {
+    outline: 2px solid var(--hp-brand);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  /* Blobs */
+  .sh-blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.35; pointer-events: none; z-index: 0; }
+  .sh-blob-1 { width: 500px; height: 500px; background: linear-gradient(135deg, #c7d2fe, #a5b4fc); top: -120px; right: -80px; }
+  .sh-blob-2 { width: 400px; height: 400px; background: linear-gradient(135deg, #6ee7b7, #34d399); bottom: 10%; left: -100px; opacity: 0.2; }
+  .sh-blob-3 { width: 350px; height: 350px; background: #ddd6fe; top: 50%; right: 10%; opacity: 0.15; }
+
+  .sh-container { max-width: var(--hp-max); margin: 0 auto; padding: 0 24px; }
+  .sh-section { padding: 100px 0; position: relative; }
+
+  /* Fond alterné (anciennement .sh-dark, nom corrigé) */
+  .sh-alt { background: var(--hp-surface); }
+
+  /* Reveal — content visible by default, JS adds animation */
+  .sh-reveal { opacity: 1; transform: translateY(0); transition: opacity 0.8s var(--hp-ease), transform 0.8s var(--hp-ease); }
+  .sh-reveal.is-hidden { opacity: 0; transform: translateY(32px); }
+  .sh-reveal.is-hidden.visible { opacity: 1; transform: translateY(0); }
+
+  /* Buttons */
+  .sh-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; padding: 14px 28px; border-radius: 100px; border: none; cursor: pointer; font-family: inherit; transition: transform 0.2s, box-shadow 0.2s; }
+  .sh-btn-primary { background: var(--hp-grad-btn); color: #fff; }
+  .sh-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(79,70,229,0.4); }
+  .sh-btn-ghost { background: var(--hp-surface); color: var(--hp-ink); border: 1px solid var(--hp-border); }
+  .sh-btn-ghost:hover { background: var(--hp-warm); }
+
+  /* Hero */
+  .sh-hero { padding: 100px 0 80px; position: relative; overflow: hidden; background: linear-gradient(180deg, var(--hp-bg) 0%, #f0f4ff 60%, var(--hp-bg) 100%); }
+  .sh-hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
+  .sh-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--hp-brand-soft); border: 1px solid rgba(79,70,229,0.1); border-radius: 100px; font-size: 0.78rem; color: var(--hp-brand); font-weight: 600; margin-bottom: 24px; width: fit-content; }
+  .sh-badge .sh-dot { width: 8px; height: 8px; background: var(--hp-accent); border-radius: 50%; animation: shPulse 2s infinite; }
+  @keyframes shPulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  /* Typographie fluide (plus de saut brutal) */
+  .sh-hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 20px; }
+  .sh-hero h1 em { font-style: normal; color: var(--hp-brand); background: var(--hp-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .sh-hero-sub { font-size: 1.1rem; color: var(--hp-ink-soft); line-height: 1.7; margin-bottom: 32px; max-width: 480px; }
+  .sh-hero-ctas { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 36px; }
+  .sh-trust { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .sh-avatars { display: flex; }
+  .sh-avatar { width: 36px; height: 36px; border-radius: 50%; border: 3px solid var(--hp-surface); margin-left: -10px; display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-size: 0.7rem; font-weight: 600; color: #fff; }
+  .sh-avatar:first-child { margin-left: 0; }
+  .sh-avatar:nth-child(1) { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+  .sh-avatar:nth-child(2) { background: linear-gradient(135deg, #10b981, #34d399); }
+  .sh-avatar:nth-child(3) { background: linear-gradient(135deg, #f59e0b, #fbbf24); }
+  .sh-avatar:nth-child(4) { background: linear-gradient(135deg, #ef4444, #f87171); }
+  .sh-trust-txt { font-size: 0.8rem; color: var(--hp-ink-faint); }
+
+  /* Mockup card */
+  .sh-mockup-wrap { position: relative; }
+  .sh-mockup { background: var(--hp-surface); border: 1px solid var(--hp-border); border-radius: var(--hp-radius); padding: 32px; box-shadow: 0 40px 80px -20px rgba(15,23,42,0.15), 0 0 0 1px rgba(255,255,255,0.5) inset; position: relative; max-width: 380px; margin: 0 auto; }
+  .sh-mh { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
+  .sh-ml { font-size: 0.7rem; color: var(--hp-ink-faint); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; }
+  .sh-ms { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--hp-accent); font-weight: 500; }
+  .sh-ms span { width: 6px; height: 6px; background: var(--hp-accent); border-radius: 50%; }
+  /* Taille réduite (2.8 -> 2.2rem) pour ne pas dominer les titres de section */
+  .sh-ma { font-family: 'Sora', sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--hp-brand); background: var(--hp-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 6px; }
+  .sh-msub { font-size: 0.85rem; color: var(--hp-ink-soft); margin-bottom: 24px; }
+  .sh-mmeta { display: flex; justify-content: space-between; padding-top: 20px; border-top: 1px solid var(--hp-border); }
+  .sh-mi { text-align: center; }
+  .sh-mil { font-size: 0.65rem; color: var(--hp-ink-faint); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .sh-miv { font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600; }
+  .sh-mbdg { position: absolute; top: -14px; right: -14px; background: linear-gradient(135deg, var(--hp-accent), #34d399); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 6px 12px; border-radius: 100px; box-shadow: 0 4px 16px -4px rgba(16,185,129,0.4); animation: shPulse 3s infinite; }
+  .sh-float { position: absolute; border-radius: var(--hp-radius-sm); padding: 10px 14px; font-size: 0.75rem; font-weight: 500; background: var(--hp-surface); border: 1px solid var(--hp-border); box-shadow: 0 8px 24px -8px rgba(0,0,0,0.1); animation: shFloat 4s ease-in-out infinite; }
+  .sh-float:nth-child(2) { animation-delay: 1s; }
+  @keyframes shFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+  @media (max-width: 968px) { .sh-hero-grid { grid-template-columns: 1fr; } .sh-hero { padding: 60px 0 60px; } .sh-mockup { max-width: 320px; } }
+  /* Évite le débordement des labels flottants sur petit écran */
+  @media (max-width: 600px) { .sh-float { display: none; } }
+
+  /* Waves (signature du hero uniquement) */
+  .sh-wave { position: absolute; bottom: -1px; left: 0; width: 100%; line-height: 0; z-index: 2; }
+  .sh-wave svg { display: block; width: 100%; height: 60px; }
+
+  /* Stats bar */
+  .sh-stats { background: var(--hp-surface); border-top: 1px solid var(--hp-border); border-bottom: 1px solid var(--hp-border); }
+  .sh-stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .sh-stat { padding: 40px 24px; text-align: center; border-right: 1px solid var(--hp-border); }
+  .sh-stat:last-child { border-right: none; }
+  .sh-sn { font-family: 'Sora', sans-serif; font-size: 2rem; font-weight: 700; color: var(--hp-brand); background: var(--hp-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .sh-sl { font-size: 0.78rem; color: var(--hp-ink-faint); margin-top: 4px; }
+  @media (max-width: 768px) { .sh-stats-inner { grid-template-columns: repeat(2, 1fr); } .sh-stat:nth-child(2) { border-right: none; } .sh-stat:nth-child(1), .sh-stat:nth-child(2) { border-bottom: 1px solid var(--hp-border); } }
+
+  /* Section headers */
+  .sh-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; color: var(--hp-brand); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 14px; }
+  .sh-kicker::before { content: ''; display: block; width: 24px; height: 2px; background: var(--hp-brand); }
+  .sh-title { font-family: 'Sora', sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.2rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .sh-desc { color: var(--hp-ink-soft); font-size: 1.05rem; max-width: 520px; line-height: 1.7; }
+
+  /* Steps */
+  .sh-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; position: relative; }
+  .sh-sline { position: absolute; top: 32px; left: 20%; right: 20%; height: 2px; background: var(--hp-grad); opacity: 0.25; z-index: 0; }
+  .sh-step { position: relative; z-index: 1; text-align: center; }
+  .sh-snum { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--hp-brand-soft), #e0e7ff); border: 2px solid var(--hp-brand); display: flex; align-items: center; justify-content: center; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.3rem; color: var(--hp-brand); margin: 0 auto 20px; }
+  .sh-step h3 { font-family: 'Sora', sans-serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 10px; }
+  .sh-step p { font-size: 0.88rem; color: var(--hp-ink-soft); line-height: 1.65; }
+  @media (max-width: 768px) { .sh-steps { grid-template-columns: 1fr; gap: 40px; } .sh-sline { display: none; } }
+
+  /* Features */
+  .sh-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+  .sh-feat { background: var(--hp-surface); border: 1px solid var(--hp-border); border-radius: var(--hp-radius-sm); padding: 32px; transition: transform 0.3s, box-shadow 0.3s; }
+  .sh-feat:hover { transform: translateY(-4px); box-shadow: 0 20px 40px -12px rgba(15,23,42,0.1); }
+  .sh-fico { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, var(--hp-brand-soft), #e0e7ff); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 18px; }
+  .sh-feat h3 { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+  .sh-feat p { font-size: 0.85rem; color: var(--hp-ink-soft); line-height: 1.65; }
+  @media (max-width: 968px) { .sh-features { grid-template-columns: 1fr; } }
+
+  /* Calculator */
+  .sh-calc { background: var(--hp-surface); border: 1px solid var(--hp-border); border-radius: var(--hp-radius); padding: 48px; }
+  .sh-cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .sh-cl { font-size: 0.8rem; color: var(--hp-ink-faint); margin-bottom: 8px; }
+  .sh-cdisp { font-family: 'Sora', sans-serif; font-size: clamp(2.2rem, 4vw, 2.8rem); font-weight: 700; }
+  .sh-cgrad { color: var(--hp-brand); background: var(--hp-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .sh-csub { font-size: 0.9rem; color: var(--hp-ink-soft); margin-top: 8px; }
+  .sh-cslider { width: 100%; margin: 24px 0; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #e2e8f0; outline: none; }
+  .sh-cslider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--hp-brand); cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 12px rgba(79,70,229,0.4); }
+  .sh-cslider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--hp-brand); cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 12px rgba(79,70,229,0.4); }
+  .sh-chl { background: linear-gradient(135deg, rgba(79,70,229,0.04), rgba(16,185,129,0.04)); border: 1px solid rgba(79,70,229,0.15); border-radius: var(--hp-radius-sm); padding: 28px; }
+  .sh-chl h3 { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; }
+  .sh-chl ul { list-style: none; }
+  .sh-chl li { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--hp-ink-soft); margin-bottom: 10px; }
+  .sh-check { width: 20px; height: 20px; border-radius: 50%; background: var(--hp-accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sh-check svg { width: 10px; height: 10px; stroke: var(--hp-accent); stroke-width: 3; fill: none; }
+  .sh-rl { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--hp-ink-faint); margin-top: 8px; }
+  @media (max-width: 768px) { .sh-calc { padding: 28px; } .sh-cgrid { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* Trust grid */
+  .sh-trustg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
+  .sh-trusti { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border-radius: var(--hp-radius-sm); background: var(--hp-surface); border: 1px solid var(--hp-border); transition: transform 0.3s; }
+  .sh-trusti:hover { transform: translateY(-3px); }
+  .sh-tico { width: 40px; height: 40px; border-radius: 12px; background: var(--hp-accent-soft); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+  .sh-trusti span { font-size: 0.92rem; font-weight: 500; }
+  @media (max-width: 640px) { .sh-trustg { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  .sh-faq { max-width: 720px; margin: 48px auto 0; }
+  .sh-fq { background: var(--hp-surface); border: 1px solid var(--hp-border); border-radius: var(--hp-radius-sm); margin-bottom: 10px; overflow: hidden; }
+  .sh-fqq { width: 100%; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; background: none; border: none; color: var(--hp-ink); font-family: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer; text-align: left; }
+  .sh-fqq::after { content: '+'; font-size: 1.2rem; color: var(--hp-brand); transition: transform 0.3s; flex-shrink: 0; }
+  .sh-fq.open .sh-fqq::after { transform: rotate(45deg); }
+  .sh-fqa { max-height: 0; overflow: hidden; transition: max-height 0.4s var(--hp-ease), padding 0.4s var(--hp-ease); padding: 0 24px; }
+  .sh-fq.open .sh-fqa { max-height: 300px; padding: 0 24px 18px; }
+  .sh-fqa p { font-size: 0.85rem; color: var(--hp-ink-soft); line-height: 1.7; }
+
+  /* CTA */
+  .sh-cta { text-align: center; position: relative; overflow: hidden; }
+  .sh-ctabg { background: linear-gradient(135deg, var(--hp-brand), var(--hp-brand-light)); border-radius: var(--hp-radius); padding: 80px 48px; position: relative; }
+  .sh-ctabg::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 350px; height: 350px; background: rgba(255,255,255,0.08); filter: blur(80px); border-radius: 50%; }
+  .sh-ctabg h2 { font-family: 'Sora', sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 700; color: #fff; margin-bottom: 16px; position: relative; }
+  .sh-ctabg p { color: rgba(255,255,255,0.9); font-size: 1.05rem; max-width: 480px; margin: 0 auto 32px; position: relative; }
+  .sh-ctabg .sh-btn-primary { background: #fff; color: var(--hp-brand); }
+  .sh-ctabg .sh-btn-primary:hover { background: #f8f9ff; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); }
+  .sh-ctasub { margin-top: 16px; font-size: 0.78rem; color: rgba(255,255,255,0.8); position: relative; }
+  @media (max-width: 768px) { .sh-ctabg { padding: 48px 24px; } }
+
+  /* Footer */
+  .sh-footer { border-top: 1px solid var(--hp-border); padding: 60px 0 40px; background: var(--hp-surface); }
+  .sh-fgrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .sh-fbrand h4 { font-family: 'Sora', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--hp-brand); background: var(--hp-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; }
+  .sh-fbrand p { font-size: 0.8rem; color: var(--hp-ink-faint); line-height: 1.7; max-width: 280px; }
+  .sh-fcol h4 { font-family: 'Sora', sans-serif; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
+  .sh-fcol ul { list-style: none; }
+  .sh-fcol li { margin-bottom: 10px; }
+  .sh-fcol a { font-size: 0.8rem; color: var(--hp-ink-faint); transition: color 0.2s; }
+  .sh-fcol a:hover { color: var(--hp-ink); }
+  .sh-fbot { border-top: 1px solid var(--hp-border); padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; font-size: 0.75rem; color: var(--hp-ink-faint); }
+  @media (max-width: 768px) { .sh-fgrid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+
+  /* WA float */
+  .sh-wa { position: fixed; bottom: 24px; right: 24px; z-index: 999; width: 56px; height: 56px; background: #25d366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.4); transition: transform 0.2s; animation: shWaP 3s infinite; }
+  .sh-wa:hover { transform: scale(1.1); }
+  @keyframes shWaP { 0%,100%{box-shadow:0 4px 20px rgba(37,211,102,0.4)} 50%{box-shadow:0 4px 30px rgba(37,211,102,0.6)} }
+
+  /* Modals */
+  .sh-mo { position: fixed; inset: 0; background: rgba(15,23,42,0.55); backdrop-filter: blur(6px); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 24px; }
+  .sh-mo.active { display: flex; }
+  .sh-m { background: var(--hp-surface); border: 1px solid var(--hp-border); border-radius: var(--hp-radius); max-width: 640px; width: 100%; max-height: 80vh; overflow-y: auto; position: relative; padding: 36px; }
+  .sh-mc { position: absolute; top: 16px; right: 18px; background: none; border: none; color: var(--hp-ink-faint); font-size: 1.5rem; cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; transition: all 0.2s; }
+  .sh-mc:hover { color: var(--hp-ink); background: var(--hp-warm); }
+  .sh-m h2 { font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 600; margin-bottom: 6px; }
+  .sh-md { font-size: 0.75rem; color: var(--hp-ink-faint); margin-bottom: 18px; }
+  .sh-mbody { font-size: 0.85rem; color: var(--hp-ink-soft); line-height: 1.8; }
+  .sh-mbody h3 { font-family: 'Sora', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--hp-ink); margin: 18px 0 6px; }
+  .sh-mbody p { margin-bottom: 10px; }
+
+  /* Préférence utilisateur : réduire les animations */
+  @media (prefers-reduced-motion: reduce) {
+    .swentio-homepage *, .sh-wa, .sh-mo, .sh-m {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+    .sh-reveal, .sh-reveal.is-hidden { opacity: 1 !important; transform: none !important; }
+  }
+
+  {% if section.settings.custom_css != blank %}{{ section.settings.custom_css }}{% endif %}
+</style>
+
+{% assign wa_number = section.settings.whatsapp_number | default: "447700000000" %}
+{% assign wa_msg = section.settings.whatsapp_message | default: "Hi, I'd like to learn more." %}
+{% assign wa_url = "https://wa.me/" | append: wa_number | append: "?text=" | append: wa_msg | url_encode %}
+{% assign contact_email = section.settings.contact_email | default: "hello@example.com" %}
+{% assign brand_name = section.settings.brand_name | default: "YourBrand" %}
+{% assign currency = section.settings.currency_symbol | default: "£" %}
+{% assign comm_target = section.settings.hero_count_commission | default: 2500 %}
+{% assign vol_target = section.settings.hero_count_volume | default: 50000 %}
+{% assign rate = section.settings.commission_rate | default: 5 %}
+{% assign calc_min = section.settings.calc_min | default: 1000 %}
+{% assign calc_max = section.settings.calc_max | default: 50000 %}
+{% assign calc_step = section.settings.calc_step | default: 500 %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+
+<div class="swentio-homepage" data-section-id="{{ section.id }}" data-currency="{{ currency }}" data-rate="{{ rate }}" data-comm="{{ comm_target }}" data-vol="{{ vol_target }}">
+
+  <div class="sh-blob sh-blob-1"></div>
+  <div class="sh-blob sh-blob-2"></div>
+  <div class="sh-blob sh-blob-3"></div>
+
+  <!-- Hero -->
+  <section class="sh-hero">
+    <div class="sh-container">
+      <div class="sh-hero-grid">
+        <div class="sh-reveal">
+          <div class="sh-badge"><span class="sh-dot"></span>{{ section.settings.hero_badge | default: "Your badge text here" }}</div>
+          <h1>{{ section.settings.hero_title | default: "Your Headline Goes" }} <em>{{ section.settings.hero_title_emphasis | default: "Right Here" }}</em></h1>
+          <p class="sh-hero-sub">{{ section.settings.hero_subtitle | default: "Your subtitle and value proposition goes here. Explain what you do in one or two sentences. Keep it clear and compelling." }}</p>
+          <div class="sh-hero-ctas">
+            <a href="{{ wa_url }}" class="sh-btn sh-btn-primary" target="_blank" rel="noopener">
+              {{ section.settings.cta_primary | default: "Primary CTA" }}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#sh-how-{{ section.id }}" class="sh-btn sh-btn-ghost">{{ section.settings.cta_secondary | default: "Learn More" }}</a>
+          </div>
+          <div class="sh-trust">
+            <div class="sh-avatars" aria-hidden="true">
+              <div class="sh-avatar">A</div>
+              <div class="sh-avatar">B</div>
+              <div class="sh-avatar">C</div>
+              <div class="sh-avatar">+</div>
+            </div>
+            <span class="sh-trust-txt">{{ section.settings.trust_text | default: "Trust indicator text" }}</span>
+          </div>
+        </div>
+
+        <div class="sh-mockup-wrap sh-reveal" style="transition-delay: 0.15s;">
+          <div class="sh-mockup">
+            <div class="sh-mbdg">{{ section.settings.mockup_badge | default: "Badge" }}</div>
+            <div class="sh-mh">
+              <span class="sh-ml">{{ section.settings.mockup_label | default: "Label" }}</span>
+              <div class="sh-ms"><span></span>{{ section.settings.mockup_status | default: "Active" }}</div>
+            </div>
+            <div class="sh-ma" id="sh-comm-{{ section.id }}">{{ currency }}0</div>
+            <div class="sh-msub">{{ section.settings.mockup_sublabel | default: "Sublabel description here" }}</div>
+            <div class="sh-mmeta">
+              <div class="sh-mi">
+                <div class="sh-mil">Metric 1</div>
+                <div class="sh-miv" id="sh-vol-{{ section.id }}">{{ currency }}0</div>
+              </div>
+              <div class="sh-mi">
+                <div class="sh-mil">Metric 2</div>
+                <div class="sh-miv">{{ rate }}%</div>
+              </div>
+              <div class="sh-mi">
+                <div class="sh-mil">Status</div>
+                <div class="sh-miv" style="color: var(--hp-accent);">{{ section.settings.mockup_status_value | default: "Active" }}</div>
+              </div>
+            </div>
+          </div>
+          <div class="sh-float" style="top: -10px; left: -20px;" aria-hidden="true">&#128272; {{ section.settings.float_1 | default: "Floating label 1" }}</div>
+          <div class="sh-float" style="bottom: 30px; right: -10px; animation-delay: 1s;" aria-hidden="true">&#9889; {{ section.settings.float_2 | default: "Floating label 2" }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="sh-wave" aria-hidden="true"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#ffffff"/></svg></div>
+  </section>
+
+  <!-- Stats -->
+  <section class="sh-stats">
+    <div class="sh-stats-inner sh-container" style="padding:0;">
+      <div class="sh-stat sh-reveal">
+        <div class="sh-sn">{{ section.settings.stat_1_value | default: "000+" }}</div>
+        <div class="sh-sl">{{ section.settings.stat_1_label | default: "Stat label 1" }}</div>
+      </div>
+      <div class="sh-stat sh-reveal" style="transition-delay: 0.1s;">
+        <div class="sh-sn">{{ section.settings.stat_2_value | default: "£00K" }}</div>
+        <div class="sh-sl">{{ section.settings.stat_2_label | default: "Stat label 2" }}</div>
+      </div>
+      <div class="sh-stat sh-reveal" style="transition-delay: 0.2s;">
+        <div class="sh-sn">{{ section.settings.stat_3_value | default: "£0,000" }}</div>
+        <div class="sh-sl">{{ section.settings.stat_3_label | default: "Stat label 3" }}</div>
+      </div>
+      <div class="sh-stat sh-reveal" style="transition-delay: 0.3s;">
+        <div class="sh-sn">{{ section.settings.stat_4_value | default: "0%" }}</div>
+        <div class="sh-sl">{{ section.settings.stat_4_label | default: "Stat label 4" }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <section class="sh-section" id="sh-how-{{ section.id }}">
+    <div class="sh-container">
+      <div class="sh-reveal" style="text-align:center;">
+        <div class="sh-kicker" style="justify-content:center;">{{ section.settings.steps_kicker | default: "Section Kicker" }}</div>
+        <h2 class="sh-title">{{ section.settings.steps_title | default: "How It Works Section Title" }}</h2>
+        <p class="sh-desc" style="margin:0 auto;">{{ section.settings.steps_desc | default: "Brief description of the process goes here." }}</p>
+      </div>
+      <div class="sh-steps">
+        <div class="sh-sline"></div>
+        {% for block in section.blocks %}
+          {% if block.type == 'step' %}
+            <div class="sh-step sh-reveal" style="transition-delay: {{ forloop.index0 | times: 0.1 }}s;" {{ block.shopify_attributes }}>
+              <div class="sh-snum">{{ forloop.index }}</div>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Calculator -->
+  <section class="sh-section sh-alt" id="sh-calc-{{ section.id }}">
+    <div class="sh-container">
+      <div class="sh-reveal">
+        <div class="sh-kicker">{{ section.settings.calc_kicker | default: "Section Kicker" }}</div>
+        <h2 class="sh-title">{{ section.settings.calc_title | default: "Calculator Section Title" }}</h2>
+        <p class="sh-desc">{{ section.settings.calc_desc | default: "Description of what the calculator does goes here." }}</p>
+      </div>
+      <div class="sh-calc sh-reveal">
+        <div class="sh-cgrid">
+          <div>
+            <div class="sh-cl" id="sh-clabel-{{ section.id }}">Slider Label</div>
+            <div class="sh-cdisp sh-cgrad" id="sh-cv-{{ section.id }}">{{ currency }}0</div>
+            <div class="sh-csub">Slider sublabel</div>
+            <input type="range" class="sh-cslider" id="sh-vs-{{ section.id }}" min="{{ calc_min }}" max="{{ calc_max }}" step="{{ calc_step }}" value="{{ calc_max }}" aria-labelledby="sh-clabel-{{ section.id }}">
+            <div class="sh-rl"><span>{{ currency }}{{ calc_min }}</span><span>{{ currency }}{{ calc_max }}</span></div>
+          </div>
+          <div class="sh-chl">
+            <h3>Result Title</h3>
+            <div class="sh-cdisp sh-cgrad" style="font-size:2.4rem; margin:8px 0;" id="sh-cc-{{ section.id }}">{{ currency }}0</div>
+            <p style="font-size:0.8rem; color: var(--hp-ink-soft); margin-bottom:16px;">Result subtitle</p>
+            <ul>
+              <li><span class="sh-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Benefit 1</li>
+              <li><span class="sh-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Benefit 2</li>
+              <li><span class="sh-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Benefit 3</li>
+            </ul>
+            <a href="{{ wa_url }}" class="sh-btn sh-btn-primary" style="margin-top:12px; width:100%; justify-content:center;" target="_blank" rel="noopener">CTA Button</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="sh-section">
+    <div class="sh-container">
+      <div class="sh-reveal" style="text-align:center;">
+        <div class="sh-kicker" style="justify-content:center;">{{ section.settings.features_kicker | default: "Section Kicker" }}</div>
+        <h2 class="sh-title">{{ section.settings.features_title | default: "Features Section Title" }}</h2>
+        <p class="sh-desc" style="margin:0 auto;">{{ section.settings.features_desc | default: "Brief description of your features goes here." }}</p>
+      </div>
+      <div class="sh-features">
+        {% for block in section.blocks %}
+          {% if block.type == 'feature' %}
+            <div class="sh-feat sh-reveal" style="transition-delay: {{ forloop.index0 | times: 0.05 }}s;" {{ block.shopify_attributes }}>
+              <div class="sh-fico" aria-hidden="true">{{ block.settings.icon }}</div>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust -->
+  <section class="sh-section sh-alt" id="sh-trust-{{ section.id }}">
+    <div class="sh-container">
+      <div class="sh-reveal" style="text-align:center;">
+        <div class="sh-kicker" style="justify-content:center;">{{ section.settings.trust_kicker | default: "Section Kicker" }}</div>
+        <h2 class="sh-title">{{ section.settings.trust_title | default: "Trust Section Title" }}</h2>
+        <p class="sh-desc" style="margin:0 auto;">{{ section.settings.trust_desc | default: "Brief description of your trust factors goes here." }}</p>
+      </div>
+      <div class="sh-trustg">
+        {% for block in section.blocks %}
+          {% if block.type == 'trust_item' %}
+            <div class="sh-trusti sh-reveal" style="transition-delay: {{ forloop.index0 | times: 0.05 }}s;" {{ block.shopify_attributes }}>
+              <span class="sh-tico" aria-hidden="true">{{ block.settings.icon }}</span>
+              <span>{{ block.settings.text }}</span>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sh-section" id="sh-faq-{{ section.id }}">
+    <div class="sh-container">
+      <div class="sh-reveal" style="text-align:center;">
+        <div class="sh-kicker" style="justify-content:center;">{{ section.settings.faq_kicker | default: "FAQ" }}</div>
+        <h2 class="sh-title">{{ section.settings.faq_title | default: "Frequently Asked Questions" }}</h2>
+      </div>
+      <div class="sh-faq">
+        {% for block in section.blocks %}
+          {% if block.type == 'faq' %}
+            <div class="sh-fq sh-reveal" style="transition-delay: {{ forloop.index0 | times: 0.05 }}s;" {{ block.shopify_attributes }}>
+              <button class="sh-fqq" type="button" aria-expanded="false" aria-controls="sh-fqa-{{ section.id }}-{{ forloop.index }}">{{ block.settings.question }}</button>
+              <div class="sh-fqa" id="sh-fqa-{{ section.id }}-{{ forloop.index }}"><p>{{ block.settings.answer }}</p></div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sh-section sh-cta sh-alt">
+    <div class="sh-container">
+      <div class="sh-ctabg sh-reveal">
+        <h2>{{ section.settings.cta_title | default: "Your CTA Headline Goes Here" }}</h2>
+        <p>{{ section.settings.cta_desc | default: "Description text for your call-to-action section. Encourage visitors to take the next step." }}</p>
+        <a href="{{ wa_url }}" class="sh-btn sh-btn-primary" style="font-size:1rem; padding:16px 36px;" target="_blank" rel="noopener">
+          {{ section.settings.cta_button | default: "CTA Button Text" }}
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <p class="sh-ctasub">{{ section.settings.cta_sub | default: "Subtext under the CTA button" }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="sh-footer">
+    <div class="sh-container">
+      <div class="sh-fgrid">
+        <div class="sh-fbrand">
+          <h4>{{ brand_name }}</h4>
+          <p>{{ section.settings.footer_desc | default: "Your brand description goes here. Briefly explain what you do." }}</p>
+        </div>
+        <div class="sh-fcol">
+          <h4>{{ section.settings.footer_col1_title | default: "Column 1" }}</h4>
+          <ul>
+            <li><a href="#sh-how-{{ section.id }}">{{ section.settings.footer_link1 | default: "Link 1" }}</a></li>
+            <li><a href="#sh-calc-{{ section.id }}">{{ section.settings.footer_link2 | default: "Link 2" }}</a></li>
+            <li><a href="#sh-trust-{{ section.id }}">{{ section.settings.footer_link3 | default: "Link 3" }}</a></li>
+            <li><a href="#sh-faq-{{ section.id }}">{{ section.settings.footer_link4 | default: "Link 4" }}</a></li>
+          </ul>
+        </div>
+        <div class="sh-fcol">
+          <h4>{{ section.settings.footer_col2_title | default: "Column 2" }}</h4>
+          <ul>
+            <li><a href="#" onclick="shOpenModal{{ section.id }}('privacy'); return false;">{{ section.settings.footer_link5 | default: "Privacy" }}</a></li>
+            <li><a href="#" onclick="shOpenModal{{ section.id }}('terms'); return false;">{{ section.settings.footer_link6 | default: "Terms" }}</a></li>
+            <li><a href="#" onclick="shOpenModal{{ section.id }}('security'); return false;">{{ section.settings.footer_link7 | default: "Security" }}</a></li>
+          </ul>
+        </div>
+        <div class="sh-fcol">
+          <h4>{{ section.settings.footer_col3_title | default: "Column 3" }}</h4>
+          <ul>
+            <li><a href="{{ wa_url }}" target="_blank" rel="noopener">{{ section.settings.footer_link8 | default: "Contact" }}</a></li>
+            <li><a href="mailto:{{ contact_email }}">{{ contact_email }}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="sh-fbot">
+        <span>&copy; {{ "now" | date: "%Y" }} {{ brand_name }}. All rights reserved.</span>
+        <span>{{ section.settings.footer_right | default: "Footer right text" }}</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- WhatsApp Float -->
+<a href="{{ wa_url }}" class="sh-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<!-- Modals -->
+<div class="sh-mo" id="sh-mo-privacy-{{ section.id }}" role="dialog" aria-modal="true" aria-labelledby="sh-mo-privacy-title-{{ section.id }}" onclick="shCloseMo{{ section.id }}(event, 'privacy')">
+  <div class="sh-m">
+    <button class="sh-mc" type="button" aria-label="Close" onclick="shModal{{ section.id }}('privacy')">&times;</button>
+    <h2 id="sh-mo-privacy-title-{{ section.id }}">{{ section.settings.modal_privacy_title | default: "Privacy Policy" }}</h2>
+    <div class="sh-md">Last updated: {{ "now" | date: "%B %d, %Y" }}</div>
+    <div class="sh-mbody">
+      <h3>1. Section Title</h3>
+      <p>Privacy policy content goes here. Replace with your actual policy text.</p>
+      <h3>2. Section Title</h3>
+      <p>More policy content here.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sh-mo" id="sh-mo-terms-{{ section.id }}" role="dialog" aria-modal="true" aria-labelledby="sh-mo-terms-title-{{ section.id }}" onclick="shCloseMo{{ section.id }}(event, 'terms')">
+  <div class="sh-m">
+    <button class="sh-mc" type="button" aria-label="Close" onclick="shModal{{ section.id }}('terms')">&times;</button>
+    <h2 id="sh-mo-terms-title-{{ section.id }}">{{ section.settings.modal_terms_title | default: "Terms of Service" }}</h2>
+    <div class="sh-md">Last updated: {{ "now" | date: "%B %d, %Y" }}</div>
+    <div class="sh-mbody">
+      <h3>1. Section Title</h3>
+      <p>Terms of service content goes here. Replace with your actual terms.</p>
+      <h3>2. Section Title</h3>
+      <p>More terms content here.</p>
+    </div>
+  </div>
+</div>
+
+<div class="sh-mo" id="sh-mo-security-{{ section.id }}" role="dialog" aria-modal="true" aria-labelledby="sh-mo-security-title-{{ section.id }}" onclick="shCloseMo{{ section.id }}(event, 'security')">
+  <div class="sh-m">
+    <button class="sh-mc" type="button" aria-label="Close" onclick="shModal{{ section.id }}('security')">&times;</button>
+    <h2 id="sh-mo-security-title-{{ section.id }}">{{ section.settings.modal_security_title | default: "Security" }}</h2>
+    <div class="sh-md">Last updated: {{ "now" | date: "%B %d, %Y" }}</div>
+    <div class="sh-mbody">
+      <h3>1. Section Title</h3>
+      <p>Security information goes here. Replace with your actual security details.</p>
+      <h3>2. Section Title</h3>
+      <p>More security content here.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var sid = '{{ section.id }}';
+  var root = document.querySelector('.swentio-homepage[data-section-id="' + sid + '"]');
+  if (!root) return;
+
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var currency = root.dataset.currency || '£';
+  var rate = (parseFloat(root.dataset.rate) || 5) / 100;
+
+  // Scroll-reveal animation (enhancement only - content is visible by default)
+  var revealEls = root.querySelectorAll('.sh-reveal');
+  if (revealEls.length && 'IntersectionObserver' in window && !reduceMotion) {
+    revealEls.forEach(function(el) { el.classList.add('is-hidden'); });
+    var ro = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(function(el) { ro.observe(el); });
+    setTimeout(function() {
+      revealEls.forEach(function(el) { el.classList.add('visible'); });
+    }, 2000);
+  }
+
+  // Hero counters
+  function anim(el, target, prefix, dur) {
+    if (reduceMotion) { el.textContent = prefix + target.toLocaleString(); return; }
+    var start = performance.now();
+    function up(now) {
+      var p = Math.min((now - start) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + Math.floor(target * e).toLocaleString();
+      if (p < 1) requestAnimationFrame(up);
+    }
+    requestAnimationFrame(up);
+  }
+  var commTarget = parseInt(root.dataset.comm, 10) || 0;
+  var volTarget = parseInt(root.dataset.vol, 10) || 0;
+  setTimeout(function() {
+    var c = document.getElementById('sh-comm-' + sid);
+    var v = document.getElementById('sh-vol-' + sid);
+    if (c) anim(c, commTarget, currency, 2000);
+    if (v) anim(v, volTarget, currency, 2500);
+  }, 500);
+
+  // Calculator slider (initialisé au chargement)
+  var s = document.getElementById('sh-vs-' + sid);
+  var cv = document.getElementById('sh-cv-' + sid);
+  var cc = document.getElementById('sh-cc-' + sid);
+  function updateCalc() {
+    var vol = parseInt(s.value, 10) || 0;
+    var comm = Math.round(vol * rate);
+    if (cv) cv.textContent = currency + vol.toLocaleString();
+    if (cc) cc.textContent = currency + comm.toLocaleString();
+  }
+  if (s) {
+    s.addEventListener('input', updateCalc);
+    updateCalc(); // évite l'affichage des placeholders au chargement
+  }
+
+  // FAQ accordion
+  root.querySelectorAll('.sh-fqq').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var item = btn.parentElement;
+      var isOpen = item.classList.contains('open');
+      root.querySelectorAll('.sh-fq').forEach(function(i) {
+        i.classList.remove('open');
+        var b = i.querySelector('.sh-fqq');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) { item.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); }
+    });
+  });
+
+  // Smooth scroll
+  root.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var href = a.getAttribute('href');
+      if (href.length > 1) {
+        var t = document.querySelector(href);
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); }
+      }
+    });
+  });
+})();
+
+// Modal functions (global, scoped by section ID)
+function shOpenModal{{ section.id }}(name) {
+  var el = document.getElementById('sh-mo-' + name + '-{{ section.id }}');
+  if (el) { el.classList.add('active'); document.body.style.overflow = 'hidden'; }
+}
+function shModal{{ section.id }}(name) {
+  var el = document.getElementById('sh-mo-' + name + '-{{ section.id }}');
+  if (el) { el.classList.remove('active'); document.body.style.overflow = ''; }
+}
+function shCloseMo{{ section.id }}(e, name) {
+  if (e.target === e.currentTarget) shModal{{ section.id }}(name);
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.sh-mo.active').forEach(function(m) {
+      m.classList.remove('active'); document.body.style.overflow = '';
+    });
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Homepage Section",
+  "tag": "section",
+  "class": "swentio-homepage-section",
+  "settings": [
+    { "type": "header", "content": "Brand & Contact" },
+    { "type": "text", "id": "brand_name", "label": "Brand Name", "default": "YourBrand" },
+    { "type": "text", "id": "currency_symbol", "label": "Currency Symbol", "default": "£", "info": "Used in the hero counters and calculator." },
+    { "type": "text", "id": "whatsapp_number", "label": "WhatsApp Number (without +)", "default": "447700000000", "info": "Format: 447XXXXXXXXX" },
+    { "type": "textarea", "id": "whatsapp_message", "label": "WhatsApp Pre-filled Message", "default": "Hi, I'd like to learn more." },
+    { "type": "text", "id": "contact_email", "label": "Contact Email", "default": "hello@example.com" },
+    { "type": "header", "content": "Hero Section" },
+    { "type": "text", "id": "hero_badge", "label": "Hero Badge", "default": "Your badge text here" },
+    { "type": "text", "id": "hero_title", "label": "Hero Title (before emphasis)", "default": "Your Headline Goes" },
+    { "type": "text", "id": "hero_title_emphasis", "label": "Hero Title Emphasis (gradient)", "default": "Right Here" },
+    { "type": "textarea", "id": "hero_subtitle", "label": "Hero Subtitle", "default": "Your subtitle and value proposition goes here." },
+    { "type": "text", "id": "cta_primary", "label": "Primary CTA", "default": "Primary CTA" },
+    { "type": "text", "id": "cta_secondary", "label": "Secondary CTA", "default": "Learn More" },
+    { "type": "text", "id": "trust_text", "label": "Trust Text", "default": "Trust indicator text" },
+    { "type": "header", "content": "Mockup Card" },
+    { "type": "text", "id": "mockup_badge", "label": "Mockup Badge", "default": "Badge" },
+    { "type": "text", "id": "mockup_label", "label": "Mockup Label", "default": "Label" },
+    { "type": "text", "id": "mockup_status", "label": "Mockup Status", "default": "Active" },
+    { "type": "text", "id": "mockup_sublabel", "label": "Mockup Sublabel", "default": "Sublabel description" },
+    { "type": "text", "id": "mockup_status_value", "label": "Mockup Status Value", "default": "Active" },
+    { "type": "number", "id": "hero_count_commission", "label": "Hero Counter — Commission target", "default": 2500 },
+    { "type": "number", "id": "hero_count_volume", "label": "Hero Counter — Volume target", "default": 50000 },
+    { "type": "text", "id": "float_1", "label": "Floating Label 1", "default": "Floating label 1" },
+    { "type": "text", "id": "float_2", "label": "Floating Label 2", "default": "Floating label 2" },
+    { "type": "header", "content": "Stats Bar" },
+    { "type": "text", "id": "stat_1_value", "label": "Stat 1 Value", "default": "000+" },
+    { "type": "text", "id": "stat_1_label", "label": "Stat 1 Label", "default": "Stat label 1" },
+    { "type": "text", "id": "stat_2_value", "label": "Stat 2 Value", "default": "£00K" },
+    { "type": "text", "id": "stat_2_label", "label": "Stat 2 Label", "default": "Stat label 2" },
+    { "type": "text", "id": "stat_3_value", "label": "Stat 3 Value", "default": "£0,000" },
+    { "type": "text", "id": "stat_3_label", "label": "Stat 3 Label", "default": "Stat label 3" },
+    { "type": "text", "id": "stat_4_value", "label": "Stat 4 Value", "default": "0%" },
+    { "type": "text", "id": "stat_4_label", "label": "Stat 4 Label", "default": "Stat label 4" },
+    { "type": "header", "content": "Steps Section" },
+    { "type": "text", "id": "steps_kicker", "label": "Steps Kicker", "default": "Section Kicker" },
+    { "type": "text", "id": "steps_title", "label": "Steps Title", "default": "How It Works Section Title" },
+    { "type": "textarea", "id": "steps_desc", "label": "Steps Description", "default": "Brief description of the process." },
+    { "type": "header", "content": "Calculator Section" },
+    { "type": "text", "id": "calc_kicker", "label": "Calc Kicker", "default": "Section Kicker" },
+    { "type": "text", "id": "calc_title", "label": "Calc Title", "default": "Calculator Section Title" },
+    { "type": "textarea", "id": "calc_desc", "label": "Calc Description", "default": "Description of what the calculator does." },
+    { "type": "number", "id": "commission_rate", "label": "Commission Rate (%)", "default": 5 },
+    { "type": "number", "id": "calc_min", "label": "Slider Min", "default": 1000 },
+    { "type": "number", "id": "calc_max", "label": "Slider Max", "default": 50000 },
+    { "type": "number", "id": "calc_step", "label": "Slider Step", "default": 500 },
+    { "type": "header", "content": "Features Section" },
+    { "type": "text", "id": "features_kicker", "label": "Features Kicker", "default": "Section Kicker" },
+    { "type": "text", "id": "features_title", "label": "Features Title", "default": "Features Section Title" },
+    { "type": "textarea", "id": "features_desc", "label": "Features Description", "default": "Brief description of your features." },
+    { "type": "header", "content": "Trust Section" },
+    { "type": "text", "id": "trust_kicker", "label": "Trust Kicker", "default": "Section Kicker" },
+    { "type": "text", "id": "trust_title", "label": "Trust Title", "default": "Trust Section Title" },
+    { "type": "textarea", "id": "trust_desc", "label": "Trust Description", "default": "Brief description of your trust factors." },
+    { "type": "header", "content": "FAQ Section" },
+    { "type": "text", "id": "faq_kicker", "label": "FAQ Kicker", "default": "FAQ" },
+    { "type": "text", "id": "faq_title", "label": "FAQ Title", "default": "Frequently Asked Questions" },
+    { "type": "header", "content": "CTA Section" },
+    { "type": "text", "id": "cta_title", "label": "CTA Title", "default": "Your CTA Headline" },
+    { "type": "textarea", "id": "cta_desc", "label": "CTA Description", "default": "CTA description text." },
+    { "type": "text", "id": "cta_button", "label": "CTA Button", "default": "CTA Button Text" },
+    { "type": "text", "id": "cta_sub", "label": "CTA Subtext", "default": "Subtext under CTA" },
+    { "type": "header", "content": "Footer" },
+    { "type": "textarea", "id": "footer_desc", "label": "Footer Description", "default": "Brand description." },
+    { "type": "text", "id": "footer_col1_title", "label": "Footer Col 1 Title", "default": "Column 1" },
+    { "type": "text", "id": "footer_link1", "label": "Footer Link 1", "default": "Link 1" },
+    { "type": "text", "id": "footer_link2", "label": "Footer Link 2", "default": "Link 2" },
+    { "type": "text", "id": "footer_link3", "label": "Footer Link 3", "default": "Link 3" },
+    { "type": "text", "id": "footer_link4", "label": "Footer Link 4", "default": "Link 4" },
+    { "type": "text", "id": "footer_col2_title", "label": "Footer Col 2 Title", "default": "Column 2" },
+    { "type": "text", "id": "footer_link5", "label": "Footer Link 5", "default": "Privacy" },
+    { "type": "text", "id": "footer_link6", "label": "Footer Link 6", "default": "Terms" },
+    { "type": "text", "id": "footer_link7", "label": "Footer Link 7", "default": "Security" },
+    { "type": "text", "id": "footer_col3_title", "label": "Footer Col 3 Title", "default": "Column 3" },
+    { "type": "text", "id": "footer_link8", "label": "Footer Link 8", "default": "Contact" },
+    { "type": "text", "id": "footer_right", "label": "Footer Right Text", "default": "Footer right text" },
+    { "type": "header", "content": "Modal Titles" },
+    { "type": "text", "id": "modal_privacy_title", "label": "Privacy Modal Title", "default": "Privacy Policy" },
+    { "type": "text", "id": "modal_terms_title", "label": "Terms Modal Title", "default": "Terms of Service" },
+    { "type": "text", "id": "modal_security_title", "label": "Security Modal Title", "default": "Security" },
+    { "type": "header", "content": "Advanced" },
+    { "type": "textarea", "id": "custom_css", "label": "Custom CSS", "info": "Appended to section styles." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Step Title", "default": "Step Title" },
+        { "type": "textarea", "id": "text", "label": "Step Description", "default": "Step description goes here." }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "&#9733;" },
+        { "type": "text", "id": "title", "label": "Feature Title", "default": "Feature Title" },
+        { "type": "textarea", "id": "text", "label": "Feature Description", "default": "Feature description goes here." }
+      ]
+    },
+    {
+      "type": "trust_item",
+      "name": "Trust Item",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji)", "default": "&#9733;" },
+        { "type": "text", "id": "text", "label": "Trust Text", "default": "Trust item text goes here." }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Your question here?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Your answer goes here." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Section",
+      "blocks": {
+        "step_1": { "type": "step", "settings": { "title": "Step 1 Title", "text": "Description of the first step." } },
+        "step_2": { "type": "step", "settings": { "title": "Step 2 Title", "text": "Description of the second step." } },
+        "step_3": { "type": "step", "settings": { "title": "Step 3 Title", "text": "Description of the third step." } },
+        "feature_1": { "type": "feature", "settings": { "icon": "&#9733;", "title": "Feature 1", "text": "Description of feature 1." } },
+        "feature_2": { "type": "feature", "settings": { "icon": "&#9733;", "title": "Feature 2", "text": "Description of feature 2." } },
+        "feature_3": { "type": "feature", "settings": { "icon": "&#9733;", "title": "Feature 3", "text": "Description of feature 3." } },
+        "feature_4": { "type": "feature", "settings": { "icon": "&#9733;", "title": "Feature 4", "text": "Description of feature 4." } },
+        "feature_5": { "type": "feature", "settings": { "icon": "&#9733;", "title": "Feature 5", "text": "Description of feature 5." } },
+        "feature_6": { "type": "feature", "settings": { "icon": "&#9733;", "title": "Feature 6", "text": "Description of feature 6." } },
+        "trust_1": { "type": "trust_item", "settings": { "icon": "&#9733;", "text": "Trust item 1 text." } },
+        "trust_2": { "type": "trust_item", "settings": { "icon": "&#9733;", "text": "Trust item 2 text." } },
+        "trust_3": { "type": "trust_item", "settings": { "icon": "&#9733;", "text": "Trust item 3 text." } },
+        "trust_4": { "type": "trust_item", "settings": { "icon": "&#9733;", "text": "Trust item 4 text." } },
+        "trust_5": { "type": "trust_item", "settings": { "icon": "&#9733;", "text": "Trust item 5 text." } },
+        "trust_6": { "type": "trust_item", "settings": { "icon": "&#9733;", "text": "Trust item 6 text." } },
+        "faq_1": { "type": "faq", "settings": { "question": "Question 1?", "answer": "Answer to question 1." } },
+        "faq_2": { "type": "faq", "settings": { "question": "Question 2?", "answer": "Answer to question 2." } },
+        "faq_3": { "type": "faq", "settings": { "question": "Question 3?", "answer": "Answer to question 3." } },
+        "faq_4": { "type": "faq", "settings": { "question": "Question 4?", "answer": "Answer to question 4." } },
+        "faq_5": { "type": "faq", "settings": { "question": "Question 5?", "answer": "Answer to question 5." } }
+      }
+    }
+  ]
+}
+{% endschema %}
