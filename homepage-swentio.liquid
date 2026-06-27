@@ -150,23 +150,43 @@
   @media (max-width: 968px) { .sh-features { grid-template-columns: 1fr; } }
 
   /* Calculator */
-  .sh-calc { background: var(--hp-surface); border: 1px solid var(--hp-border); border-radius: var(--hp-radius); padding: 48px; }
-  .sh-cgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-  .sh-cl { font-size: 0.8rem; color: var(--hp-ink-faint); margin-bottom: 8px; }
-  .sh-cdisp { font-family: 'Sora', sans-serif; font-size: clamp(2.2rem, 4vw, 2.8rem); font-weight: 700; }
+  .sh-calc { position: relative; overflow: hidden; background: linear-gradient(135deg, #ffffff, #f6f8ff); border: 1px solid var(--hp-border); border-radius: var(--hp-radius); padding: 40px; box-shadow: 0 30px 60px -30px rgba(15,23,42,0.12); }
+  .sh-cglow { position: absolute; width: 360px; height: 360px; border-radius: 50%; filter: blur(90px); opacity: 0.38; pointer-events: none; z-index: 0; animation: shGlow 8s ease-in-out infinite; }
+  .sh-cglow-1 { top: -130px; right: -90px; background: linear-gradient(135deg, #c7d2fe, #a5b4fc); }
+  .sh-cglow-2 { bottom: -150px; left: -110px; background: linear-gradient(135deg, #6ee7b7, #34d399); opacity: 0.26; animation-delay: 2.5s; }
+  @keyframes shGlow { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-18px) scale(1.06)} }
+  .sh-cgrid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+
+  /* Input card */
+  .sh-cinput { background: var(--hp-surface); border: 1px solid var(--hp-border); border-radius: var(--hp-radius-sm); padding: 28px; display: flex; flex-direction: column; justify-content: center; box-shadow: 0 10px 30px -18px rgba(15,23,42,0.12); }
+  .sh-chead { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+  .sh-cico { width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(135deg, var(--hp-brand-soft), #e0e7ff); display: flex; align-items: center; justify-content: center; font-size: 1.05rem; flex-shrink: 0; }
+  .sh-cl { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--hp-ink-faint); }
+  .sh-cval { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .sh-cdisp { font-family: 'Sora', sans-serif; font-size: clamp(2.2rem, 4vw, 2.8rem); font-weight: 700; line-height: 1; }
+  .sh-cdisp-ink { color: var(--hp-ink); }
   .sh-cgrad { color: var(--hp-brand); background: var(--hp-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-  .sh-csub { font-size: 0.9rem; color: var(--hp-ink-soft); margin-top: 8px; }
-  .sh-cslider { width: 100%; margin: 24px 0; -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: #e2e8f0; outline: none; }
-  .sh-cslider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--hp-brand); cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 12px rgba(79,70,229,0.4); }
-  .sh-cslider::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--hp-brand); cursor: pointer; border: 3px solid #fff; box-shadow: 0 2px 12px rgba(79,70,229,0.4); }
-  .sh-chl { background: linear-gradient(135deg, rgba(79,70,229,0.04), rgba(16,185,129,0.04)); border: 1px solid rgba(79,70,229,0.15); border-radius: var(--hp-radius-sm); padding: 28px; }
-  .sh-chl h3 { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 12px; }
-  .sh-chl ul { list-style: none; }
+  .sh-cunit { font-size: 0.78rem; font-weight: 600; color: var(--hp-brand); background: var(--hp-brand-soft); padding: 4px 10px; border-radius: 100px; }
+  .sh-csub { font-size: 0.85rem; color: var(--hp-ink-soft); margin-top: 8px; }
+  .sh-cslider { width: 100%; margin: 22px 0 12px; -webkit-appearance: none; appearance: none; height: 8px; border-radius: 100px; background: #e8ecf4; outline: none; }
+  .sh-cslider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--hp-brand); cursor: pointer; border: 4px solid #fff; box-shadow: 0 2px 12px rgba(79,70,229,0.45); transition: transform 0.15s; }
+  .sh-cslider::-webkit-slider-thumb:hover { transform: scale(1.12); }
+  .sh-cslider::-moz-range-thumb { width: 24px; height: 24px; border-radius: 50%; background: var(--hp-brand); cursor: pointer; border: 4px solid #fff; box-shadow: 0 2px 12px rgba(79,70,229,0.45); }
+  .sh-cscale { display: flex; justify-content: space-between; align-items: flex-end; height: 12px; margin-bottom: 6px; padding: 0 2px; }
+  .sh-cscale span { width: 2px; border-radius: 2px; background: var(--hp-border); }
+  .sh-cscale span:nth-child(odd) { height: 11px; }
+  .sh-cscale span:nth-child(even) { height: 6px; }
+  .sh-rl { display: flex; justify-content: space-between; font-size: 0.72rem; font-weight: 500; color: var(--hp-ink-faint); }
+
+  /* Result card */
+  .sh-chl { position: relative; background: linear-gradient(135deg, rgba(79,70,229,0.06), rgba(16,185,129,0.06)); border: 1px solid rgba(79,70,229,0.18); border-radius: var(--hp-radius-sm); padding: 28px; }
+  .sh-chl h3 { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 10px; }
+  .sh-cnote { display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem; font-weight: 600; color: var(--hp-accent); background: var(--hp-accent-soft); padding: 4px 12px; border-radius: 100px; margin: 6px 0 18px; }
+  .sh-chl ul { list-style: none; margin-bottom: 4px; }
   .sh-chl li { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; color: var(--hp-ink-soft); margin-bottom: 10px; }
   .sh-check { width: 20px; height: 20px; border-radius: 50%; background: var(--hp-accent-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .sh-check svg { width: 10px; height: 10px; stroke: var(--hp-accent); stroke-width: 3; fill: none; }
-  .sh-rl { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--hp-ink-faint); margin-top: 8px; }
-  @media (max-width: 768px) { .sh-calc { padding: 28px; } .sh-cgrid { grid-template-columns: 1fr; gap: 32px; } }
+  @media (max-width: 768px) { .sh-calc { padding: 24px; } .sh-cgrid { grid-template-columns: 1fr; gap: 18px; } }
 
   /* Trust grid */
   .sh-trustg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 48px; }
@@ -252,6 +272,7 @@
 {% assign calc_min = section.settings.calc_min | default: 1000 %}
 {% assign calc_max = section.settings.calc_max | default: 50000 %}
 {% assign calc_step = section.settings.calc_step | default: 500 %}
+{% assign init_comm = calc_max | times: rate | divided_by: 100 %}
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -375,24 +396,33 @@
         <p class="sh-desc">{{ section.settings.calc_desc | default: "Description of what the calculator does goes here." }}</p>
       </div>
       <div class="sh-calc sh-reveal">
+        <span class="sh-cglow sh-cglow-1" aria-hidden="true"></span>
+        <span class="sh-cglow sh-cglow-2" aria-hidden="true"></span>
         <div class="sh-cgrid">
-          <div>
-            <div class="sh-cl" id="sh-clabel-{{ section.id }}">Slider Label</div>
-            <div class="sh-cdisp sh-cgrad" id="sh-cv-{{ section.id }}">{{ currency }}0</div>
-            <div class="sh-csub">Slider sublabel</div>
+          <div class="sh-cinput">
+            <div class="sh-chead">
+              <span class="sh-cico" aria-hidden="true">{{ section.settings.calc_icon | default: "📊" }}</span>
+              <div class="sh-cl" id="sh-clabel-{{ section.id }}">{{ section.settings.calc_slider_label | default: "Monthly volume" }}</div>
+            </div>
+            <div class="sh-cval">
+              <div class="sh-cdisp sh-cdisp-ink" id="sh-cv-{{ section.id }}">{{ currency }}{{ calc_max }}</div>
+              {% if section.settings.calc_value_unit != blank %}<span class="sh-cunit">{{ section.settings.calc_value_unit }}</span>{% endif %}
+            </div>
+            <div class="sh-csub">{{ section.settings.calc_slider_sublabel | default: "Drag to match your volume" }}</div>
             <input type="range" class="sh-cslider" id="sh-vs-{{ section.id }}" min="{{ calc_min }}" max="{{ calc_max }}" step="{{ calc_step }}" value="{{ calc_max }}" aria-labelledby="sh-clabel-{{ section.id }}">
+            <div class="sh-cscale" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
             <div class="sh-rl"><span>{{ currency }}{{ calc_min }}</span><span>{{ currency }}{{ calc_max }}</span></div>
           </div>
           <div class="sh-chl">
-            <h3>Result Title</h3>
-            <div class="sh-cdisp sh-cgrad" style="font-size:2.4rem; margin:8px 0;" id="sh-cc-{{ section.id }}">{{ currency }}0</div>
-            <p style="font-size:0.8rem; color: var(--hp-ink-soft); margin-bottom:16px;">Result subtitle</p>
+            <h3>{{ section.settings.calc_result_title | default: "Your estimated result" }}</h3>
+            <div class="sh-cdisp sh-cgrad" style="font-size:clamp(2rem,3.5vw,2.4rem); margin:4px 0;" id="sh-cc-{{ section.id }}">{{ currency }}{{ init_comm }}</div>
+            <span class="sh-cnote">&#9650; {{ section.settings.calc_note | default: "Based on a 5% rate" }}</span>
             <ul>
-              <li><span class="sh-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Benefit 1</li>
-              <li><span class="sh-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Benefit 2</li>
-              <li><span class="sh-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> Benefit 3</li>
+              <li><span class="sh-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> {{ section.settings.calc_benefit_1 | default: "Fast payouts" }}</li>
+              <li><span class="sh-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> {{ section.settings.calc_benefit_2 | default: "No hidden fees" }}</li>
+              <li><span class="sh-check"><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg></span> {{ section.settings.calc_benefit_3 | default: "Cancel anytime" }}</li>
             </ul>
-            <a href="{{ wa_url }}" class="sh-btn sh-btn-primary" style="margin-top:12px; width:100%; justify-content:center;" target="_blank" rel="noopener">CTA Button</a>
+            <a href="{{ wa_url }}" class="sh-btn sh-btn-primary" style="margin-top:12px; width:100%; justify-content:center;" target="_blank" rel="noopener">{{ section.settings.calc_cta_label | default: "Get started" }}</a>
           </div>
         </div>
       </div>
@@ -615,15 +645,29 @@
   var s = document.getElementById('sh-vs-' + sid);
   var cv = document.getElementById('sh-cv-' + sid);
   var cc = document.getElementById('sh-cc-' + sid);
+  function setFill() {
+    var mn = parseInt(s.min, 10) || 0, mx = parseInt(s.max, 10) || 100, vl = parseInt(s.value, 10) || 0;
+    var pct = mx > mn ? ((vl - mn) / (mx - mn)) * 100 : 0;
+    s.style.background = 'linear-gradient(90deg, var(--hp-brand) 0%, var(--hp-brand-light) ' + pct + '%, #e8ecf4 ' + pct + '%)';
+  }
   function updateCalc() {
     var vol = parseInt(s.value, 10) || 0;
     var comm = Math.round(vol * rate);
     if (cv) cv.textContent = currency + vol.toLocaleString();
     if (cc) cc.textContent = currency + comm.toLocaleString();
+    setFill();
   }
   if (s) {
     s.addEventListener('input', updateCalc);
-    updateCalc(); // évite l'affichage des placeholders au chargement
+    setFill();
+    // évite l'affichage des placeholders ; anime le comptage à l'apparition
+    if (!reduceMotion && cv && cc) {
+      var vol0 = parseInt(s.value, 10) || 0;
+      anim(cv, vol0, currency, 1200);
+      anim(cc, Math.round(vol0 * rate), currency, 1400);
+    } else {
+      updateCalc();
+    }
   }
 
   // FAQ accordion
@@ -724,6 +768,16 @@ document.addEventListener('keydown', function(e) {
     { "type": "number", "id": "calc_min", "label": "Slider Min", "default": 1000 },
     { "type": "number", "id": "calc_max", "label": "Slider Max", "default": 50000 },
     { "type": "number", "id": "calc_step", "label": "Slider Step", "default": 500 },
+    { "type": "text", "id": "calc_icon", "label": "Calc Icon (emoji)", "default": "📊" },
+    { "type": "text", "id": "calc_slider_label", "label": "Slider Label", "default": "Monthly volume" },
+    { "type": "text", "id": "calc_slider_sublabel", "label": "Slider Sublabel", "default": "Drag to match your volume" },
+    { "type": "text", "id": "calc_value_unit", "label": "Value Unit Badge (optional)", "default": "/ month" },
+    { "type": "text", "id": "calc_result_title", "label": "Result Title", "default": "Your estimated result" },
+    { "type": "text", "id": "calc_note", "label": "Result Note (pill)", "default": "Based on a 5% rate" },
+    { "type": "text", "id": "calc_benefit_1", "label": "Benefit 1", "default": "Fast payouts" },
+    { "type": "text", "id": "calc_benefit_2", "label": "Benefit 2", "default": "No hidden fees" },
+    { "type": "text", "id": "calc_benefit_3", "label": "Benefit 3", "default": "Cancel anytime" },
+    { "type": "text", "id": "calc_cta_label", "label": "Calc CTA Button", "default": "Get started" },
     { "type": "header", "content": "Features Section" },
     { "type": "text", "id": "features_kicker", "label": "Features Kicker", "default": "Section Kicker" },
     { "type": "text", "id": "features_title", "label": "Features Title", "default": "Features Section Title" },
