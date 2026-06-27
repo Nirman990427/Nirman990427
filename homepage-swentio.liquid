@@ -61,12 +61,13 @@
   .sh-reveal.is-hidden { opacity: 0; transform: translateY(32px); }
   .sh-reveal.is-hidden.visible { opacity: 1; transform: translateY(0); }
 
-  /* Buttons */
-  .sh-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; padding: 14px 28px; border-radius: 100px; border: none; cursor: pointer; font-family: inherit; transition: transform 0.2s, box-shadow 0.2s; }
-  .sh-btn-primary { background: var(--hp-grad-btn); color: #fff; }
-  .sh-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(79,70,229,0.4); }
-  .sh-btn-ghost { background: var(--hp-surface); color: var(--hp-ink); border: 1px solid var(--hp-border); }
-  .sh-btn-ghost:hover { background: var(--hp-warm); }
+  /* Buttons (sélecteurs préfixés .swentio-homepage pour battre le reset des liens) */
+  .swentio-homepage .sh-btn { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 0.9rem; padding: 14px 28px; border-radius: 100px; border: none; cursor: pointer; font-family: inherit; transition: transform 0.2s, box-shadow 0.2s; }
+  .swentio-homepage .sh-btn-primary { background: var(--hp-grad-btn); color: #ffffff; }
+  .swentio-homepage .sh-btn-primary svg { stroke: #ffffff; }
+  .swentio-homepage .sh-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(79,70,229,0.4); }
+  .swentio-homepage .sh-btn-ghost { background: var(--hp-surface); color: var(--hp-ink); border: 1px solid var(--hp-border); }
+  .swentio-homepage .sh-btn-ghost:hover { background: var(--hp-warm); }
 
   /* Hero */
   .sh-hero { padding: 100px 0 80px; position: relative; overflow: hidden; background: linear-gradient(180deg, var(--hp-bg) 0%, #f0f4ff 60%, var(--hp-bg) 100%); }
@@ -212,8 +213,9 @@
   .sh-ctabg::before { content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%); width: 350px; height: 350px; background: rgba(255,255,255,0.08); filter: blur(80px); border-radius: 50%; }
   .sh-ctabg h2 { font-family: 'Sora', sans-serif; font-size: clamp(1.7rem, 3.5vw, 2.4rem); font-weight: 700; color: #fff; margin-bottom: 16px; position: relative; }
   .sh-ctabg p { color: rgba(255,255,255,0.9); font-size: 1.05rem; max-width: 480px; margin: 0 auto 32px; position: relative; }
-  .sh-ctabg .sh-btn-primary { background: #fff; color: var(--hp-brand); }
-  .sh-ctabg .sh-btn-primary:hover { background: #f8f9ff; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); }
+  .swentio-homepage .sh-ctabg .sh-btn-primary { background: #fff; color: var(--hp-brand); }
+  .swentio-homepage .sh-ctabg .sh-btn-primary svg { stroke: var(--hp-brand); }
+  .swentio-homepage .sh-ctabg .sh-btn-primary:hover { background: #f8f9ff; box-shadow: 0 12px 32px -8px rgba(0,0,0,0.2); }
   .sh-ctasub { margin-top: 16px; font-size: 0.78rem; color: rgba(255,255,255,0.8); position: relative; }
   @media (max-width: 768px) { .sh-ctabg { padding: 48px 24px; } }
 
