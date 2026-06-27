@@ -444,8 +444,10 @@
             <span class="cs-eyebrow"><span class="cs-dot"></span>{{ section.settings.hero_eyebrow | default: 'Infrastructure Division — Now Recruiting' }}</span>
             <h1>{{ section.settings.hero_title | default: 'Join the Enterprise Network' }}</h1>
             <p class="cs-hero-sub">{{ section.settings.hero_subtitle | default: 'We manage high-scale operations processing millions monthly. Our clients need verified infrastructure. Partner with our division, keep full administrator control, and earn daily returns.' }}</p>
+            {%- assign cs_hero_primary = section.settings.hero_primary_link -%}
+            {%- if cs_hero_primary == blank -%}{%- assign cs_hero_primary = '#cs-apply-' | append: section.id -%}{%- endif -%}
             <div class="cs-hero-cta">
-              <a href="{{ section.settings.hero_primary_link | default: '#cs-apply-{{ section.id }}' }}" class="cs-btn cs-btn--primary">{{ section.settings.hero_primary_label | default: 'Apply Now' }}</a>
+              <a href="{{ cs_hero_primary }}" class="cs-btn cs-btn--primary">{{ section.settings.hero_primary_label | default: 'Apply Now' }}</a>
               <a href="#cs-program-{{ section.id }}" class="cs-btn cs-btn--ghost">{{ section.settings.hero_secondary_label | default: 'See the Program' }}</a>
             </div>
 
